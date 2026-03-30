@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Positionnement de Transparence Managériale — Management Régénératif</title>
+<meta name="description" content="Où en êtes-vous sur l'échelle de transparence managériale ? 30 questions pour situer votre niveau.">
+<meta name="author" content="Benjamin Chaminade">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0D0F0E;
+  --bg2:     #131614;
+  --bg3:     #1A1D1B;
+  --surface: #202422;
+  --border:  rgba(255,255,255,.08);
+  --border2: rgba(255,255,255,.14);
+  --text:    #F0EDE6;
+  --muted:   #8A8A80;
+  --faint:   #3A3D3B;
+
+  --n0: #E05252; --n0d: rgba(224,82,82,.12);
+  --n1: #E07040; --n1d: rgba(224,112,64,.12);
+  --n2: #C89030; --n2d: rgba(200,144,48,.12);
+  --n3: #5AAA60; --n3d: rgba(90,170,96,.12);
+  --n4: #4A90D0; --n4d: rgba(74,144,208,.12);
+  --n5: #8A70E0; --n5d: rgba(138,112,224,.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+.app { max-width: 840px; margin: 0 auto; padding: 24px 16px 80px; }
+
+/* ── HEADER ──────────────────────────────────── */
+.header {
+  padding: 64px 0 52px;
+  position: relative;
+  overflow: hidden;
+}
+.header-bg-num {
+  position: absolute;
+  top: -20px; right: -20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 220px;
+  font-weight: 900;
+  color: rgba(255,255,255,.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.header-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px;
+  background: rgba(90,170,96,.15);
+  color: var(--n3);
+  border: 1px solid rgba(90,170,96,.25);
+  margin-bottom: 22px;
+}
+.header h1 {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 18px;
+  letter-spacing: -.02em;
+}
+.header h1 em {
+  font-style: italic;
+  color: var(--n3);
+}
+.header .sub {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 580px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.header-divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--n1), var(--n3), var(--n5));
+  margin: 28px 0;
+  border-radius: 2px;
+}
+
+/* ── LADDER PREVIEW ──────────────────────────── */
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  margin: 32px 0;
+}
+.ladder-step {
+  padding: 14px 8px 12px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  transition: transform .2s, border-color .2s;
+  cursor: default;
+}
+.ladder-step:hover { transform: translateY(-3px); }
+.ls-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900;
+  line-height: 1; margin-bottom: 5px;
+}
+.ls-label {
+  font-size: .64rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--muted);
+}
+
+/* ── INTRO CARD ──────────────────────────────── */
+.intro-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  margin-bottom: 28px;
+}
+.intro-card h2 {
+  font-size: 1.4rem; color: var(--text);
+  margin-bottom: 14px;
+}
+.intro-card p { font-size: .93rem; color: var(--muted); margin-bottom: 16px; line-height: 1.7; }
+.dims-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.dim-pill {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.dim-pill-name { font-size: .8rem; font-weight: 600; margin-bottom: 3px; }
+.dim-pill-desc { font-size: .73rem; color: var(--muted); line-height: 1.4; }
+.note-box {
+  background: rgba(200,144,48,.1);
+  border-left: 3px solid var(--n2);
+  border-radius: 0 8px 8px 0;
+  padding: 13px 16px;
+  font-size: .86rem;
+  color: #D4A84A;
+}
+
+/* ── START BUTTON ────────────────────────────── */
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px;
+  background: var(--n3);
+  color: #0D1A0F;
+  border: none; border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .02em;
+}
+.btn-start:hover { background: #6DC075; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(90,170,96,.3); }
+
+/* ── PROGRESS ────────────────────────────────── */
+.progress-wrap { margin-bottom: 24px; }
+.progress-meta {
+  display: flex; justify-content: space-between;
+  font-size: .75rem; font-weight: 600; color: var(--muted);
+  margin-bottom: 8px;
+}
+.pbar { height: 3px; background: var(--faint); border-radius: 2px; }
+.pbar-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--n1), var(--n3), var(--n5));
+  transition: width .5s ease;
+}
+
+/* ── DIM TABS ────────────────────────────────── */
+.dim-tabs { display: flex; gap: 4px; margin-bottom: 22px; flex-wrap: wrap; }
+.dim-tab {
+  flex: 1; min-width: 72px;
+  padding: 9px 6px; border-radius: 10px;
+  font-size: .65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--muted);
+  transition: all .2s;
+}
+.dim-tab:hover { border-color: var(--border2); color: var(--text); }
+.dim-tab.active { border-color: currentColor; background: var(--bg3); }
+.dim-tab.done { opacity: .65; }
+
+/* ── DIM HEADER ──────────────────────────────── */
+.dim-header {
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border: 1px solid;
+}
+.dim-header-name {
+  font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  margin-bottom: 5px;
+}
+.dim-header-desc { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+.dim-header-ref { font-size: .72rem; font-weight: 600; margin-top: 6px; }
+
+/* ── QUESTION CARD ───────────────────────────── */
+.q-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 14px;
+  animation: fadeUp .3s ease;
+  transition: border-color .2s;
+}
+.q-card.answered { border-color: var(--border2); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.q-num {
+  font-size: .68rem; font-weight: 700;
+  color: var(--muted); text-transform: uppercase; letter-spacing: .07em;
+  margin-bottom: 8px;
+}
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.02rem; font-weight: 400;
+  color: var(--text); line-height: 1.65;
+  margin-bottom: 12px;
+}
+.q-context {
+  font-size: .78rem; color: var(--muted);
+  font-style: italic; line-height: 1.55;
+  margin-bottom: 18px;
+  padding-left: 12px;
+  border-left: 2px solid var(--faint);
+}
+
+/* ── RATING ──────────────────────────────────── */
+.rating-wrap { display: flex; gap: 6px; }
+.rb {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 12px 4px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg3);
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: .67rem; font-weight: 600;
+  cursor: pointer;
+  transition: all .18s;
+  text-align: center;
+}
+.rb:hover { border-color: var(--border2); color: var(--text); transform: translateY(-2px); }
+.rb.sel {
+  color: #0D1A0F;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+}
+.rb-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  line-height: 1;
+}
+
+/* ── NAV ─────────────────────────────────────── */
+.nav-btns { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+.btn {
+  padding: 11px 24px; border: none; border-radius: 10px;
+  font-family: 'Outfit', sans-serif; font-size: .88rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-sec {
+  background: var(--bg3); color: var(--muted);
+  border: 1px solid var(--border);
+}
+.btn-sec:hover { color: var(--text); border-color: var(--border2); }
+.btn-next { background: var(--n3); color: #0D1A0F; }
+.btn-next:hover { background: #6DC075; transform: translateY(-1px); }
+.btn-next:disabled { background: var(--faint); color: var(--muted); cursor: not-allowed; transform: none; }
+.btn-dl { background: var(--n2); color: #1A1200; }
+.btn-dl:hover { background: #D9A040; transform: translateY(-1px); }
+
+/* ── RESULTS ─────────────────────────────────── */
+.result-hero {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 40px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.result-hero-bg {
+  position: absolute;
+  top: -40px; left: 50%; transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 280px; font-weight: 900;
+  opacity: .04; line-height: 1;
+  pointer-events: none; user-select: none;
+  white-space: nowrap;
+}
+.result-niv-tag {
+  display: inline-block;
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 16px; border-radius: 20px;
+  margin-bottom: 16px;
+}
+.result-niv-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 7vw, 3.6rem);
+  font-weight: 900; letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.result-score { font-size: .92rem; color: var(--muted); margin-bottom: 20px; }
+.result-scorebar {
+  width: 100%; max-width: 400px;
+  height: 6px; background: var(--faint);
+  border-radius: 3px; overflow: hidden;
+  margin: 0 auto 24px;
+}
+.result-scorefill { height: 100%; border-radius: 3px; transition: width 1.2s ease; }
+.result-desc {
+  font-size: .95rem; color: var(--muted);
+  max-width: 580px; margin: 0 auto 24px;
+  line-height: 1.8; font-weight: 300;
+}
+.result-action {
+  border-radius: 12px; padding: 14px 20px;
+  max-width: 520px; margin: 0 auto 24px;
+  text-align: left;
+  border: 1px solid;
+}
+.result-action-label {
+  font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  margin-bottom: 6px;
+}
+.result-action p { font-size: .88rem; line-height: 1.65; }
+
+/* ── RESULT TABS ─────────────────────────────── */
+.res-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
+.res-tab {
+  flex: 1; padding: 10px;
+  background: var(--bg2); color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: .8rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.res-tab.active { color: var(--text); border-color: var(--border2); background: var(--bg3); }
+
+/* ── DIM SCORES ──────────────────────────────── */
+.dim-scores-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 30px;
+  margin-bottom: 20px;
+}
+.dim-scores-card h2 { font-size: 1.3rem; color: var(--text); margin-bottom: 22px; }
+.ds-row { margin-bottom: 18px; }
+.ds-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; }
+.ds-name { font-size: .88rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.ds-val { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; }
+.ds-bar { height: 6px; background: var(--faint); border-radius: 3px; overflow: hidden; }
+.ds-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+.ds-niv { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
+
+/* ── RECO ────────────────────────────────────── */
+.reco-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-radius: 0 14px 14px 0;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+.reco-card h3 {
+  font-size: 1rem; font-family: 'Playfair Display', serif;
+  color: var(--text); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 10px;
+}
+.reco-card p { font-size: .86rem; color: var(--muted); line-height: 1.7; }
+.step-dot {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .68rem; font-weight: 700; color: var(--bg);
+  flex-shrink: 0;
+}
+
+/* ── DETAIL ──────────────────────────────────── */
+.det-section {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 22px 24px;
+  margin-bottom: 14px;
+}
+.det-section-head {
+  font-size: .9rem; font-weight: 700;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.det-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; border-bottom: 1px solid var(--faint);
+  font-size: .78rem;
+}
+.det-row:last-child { border-bottom: none; }
+.det-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .7rem;
+  flex-shrink: 0;
+}
+.det-txt { flex: 1; color: var(--muted); font-style: italic; line-height: 1.4; }
+.det-val { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+
+/* ── CONSEIL BOX ─────────────────────────────── */
+.conseil-box {
+  border-radius: 12px; padding: 18px 22px;
+  margin-bottom: 18px; border: 1px solid;
+}
+.conseil-box-label {
+  font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  margin-bottom: 8px;
+}
+.conseil-box p { font-size: .88rem; line-height: 1.7; }
+
+.foot {
+  text-align: center; padding: 40px 20px 20px;
+  font-size: .73rem; color: var(--faint); line-height: 2;
+}
+
+@media (max-width: 600px) {
+  .ladder { grid-template-columns: repeat(3, 1fr); }
+  .dims-grid { grid-template-columns: 1fr; }
+  .q-card { padding: 20px; }
+  .rating-wrap { gap: 4px; }
+  .rb { padding: 10px 3px; font-size: .6rem; }
+  .rb-val { font-size: 1.2rem; }
+  .result-hero { padding: 32px 20px; }
+  .dim-scores-card { padding: 20px 16px; }
+  .res-tabs { flex-wrap: wrap; }
+  .header h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script>var ow=console.warn;console.warn=function(m){if(typeof m==='string'&&m.indexOf('in-browser Babel')!==-1)return;ow.apply(console,arguments)};</script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.23.9/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+const DIMENSIONS = [
+  { id:"operationnelle", label:"Opérationnelle", icon:"⚙", color:"#E07040", colorD:"rgba(224,112,64,.14)", chapRef:"Chapitre 10", desc:"Partager les objectifs, les contraintes et les critères de décision de chaque projet — la base qui permet à chacun de comprendre le « pourquoi » de son action." },
+  { id:"tactique",       label:"Tactique",       icon:"◈", color:"#5AAA60", colorD:"rgba(90,170,96,.14)",  chapRef:"Chapitre 10", desc:"Ouvrir l'accès aux indicateurs de performance, aux retours clients et aux analyses. Cette information nourrit la prise de décision collective." },
+  { id:"strategique",    label:"Stratégique",    icon:"◎", color:"#4A90D0", colorD:"rgba(74,144,208,.14)", chapRef:"Chapitre 10", desc:"Exposer les choix d'orientation, les défis économiques et les opportunités. Cette vision transforme vos collaborateurs en partenaires de la réussite." },
+  { id:"relationnelle",  label:"Relationnelle",  icon:"◉", color:"#9A70C8", colorD:"rgba(154,112,200,.14)",chapRef:"Chapitre 10", desc:"Qualité du feedback, reconnaissance des erreurs, cohérence entre ce qui est dit et ce qui est fait." },
+  { id:"temporelle",     label:"Temporelle",     icon:"◷", color:"#50A8B0", colorD:"rgba(80,168,176,.14)", chapRef:"Chapitre 4",  desc:"Partager les rythmes, les priorités changeantes, les délais réels et les tensions entre court et long terme." },
+];
+
+const QUESTIONS = [
+  { id:"o1", dim:"operationnelle", texte:"Je communique systématiquement les objectifs de chaque projet ainsi que les contraintes qui encadrent les décisions.", context:"Ex : budget, délais imposés, dépendances organisationnelles, non-négociables." },
+  { id:"o2", dim:"operationnelle", texte:"Mes collaborateurs comprennent pourquoi les décisions sont prises, pas seulement ce qu'ils doivent faire.", context:"Le « pourquoi » avant le « comment » — c'est la base de l'autonomie réelle." },
+  { id:"o3", dim:"operationnelle", texte:"Je partage les critères que j'utilise pour prendre mes décisions, même quand elles sont impopulaires.", context:"Ex : critère de priorisation, arbitrage ressources, choix d'une mission sur une autre." },
+  { id:"o4", dim:"operationnelle", texte:"Mes collaborateurs connaissent les règles du jeu de leur rémunération : les critères, la logique, la progression possible.", context:"Ils n'ont pas nécessairement accès aux chiffres des autres, mais ils comprennent la structure." },
+  { id:"o5", dim:"operationnelle", texte:"Quand une contrainte organisationnelle m'empêche d'agir autrement, je l'explique plutôt que de laisser mon équipe interpréter.", context:"L'opacité sur les contraintes génère méfiance et sentiment d'injustice." },
+  { id:"o6", dim:"operationnelle", texte:"Je communique les fourchettes salariales par poste ou les critères objectifs qui les déterminent.", context:"Conforme aux exigences de la directive (UE) 2023/970 attendue en juin 2026." },
+  { id:"t1", dim:"tactique", texte:"Mes collaborateurs ont accès aux indicateurs de performance de l'équipe en temps quasi-réel, pas seulement en fin de trimestre.", context:"Tableaux de bord partagés, OKR visibles, résultats accessibles sans intermédiaire." },
+  { id:"t2", dim:"tactique", texte:"Je partage régulièrement les retours clients — positifs comme négatifs — avec l'ensemble de l'équipe.", context:"L'équipe qui n'entend jamais les clients perd le sens de son action." },
+  { id:"t3", dim:"tactique", texte:"Mes collaborateurs comprennent la position de notre équipe vis-à-vis des autres équipes ou de la concurrence.", context:"Analyses concurrentielles, benchmarks internes, positionnement sur les projets transverses." },
+  { id:"t4", dim:"tactique", texte:"Quand les résultats sont mauvais, je l'annonce clairement et j'explique les causes plutôt que de minimiser.", context:"La transparence sur les difficultés est plus régénérative que le management par les bonnes nouvelles." },
+  { id:"t5", dim:"tactique", texte:"Mes collaborateurs savent comment leurs actions individuelles contribuent aux résultats collectifs.", context:"Traçabilité de l'impact : chacun voit le lien entre son travail et les indicateurs de l'équipe." },
+  { id:"t6", dim:"tactique", texte:"Je partage les analyses d'échecs et les post-mortems avec l'équipe, pas seulement les succès.", context:"L'erreur fertile : l'apprentissage collectif exige la transparence sur ce qui n'a pas fonctionné." },
+  { id:"s1", dim:"strategique", texte:"Mes collaborateurs comprennent les enjeux économiques de l'organisation, pas seulement leur périmètre immédiat.", context:"Marges, pression budgétaire, enjeux de financement, risques stratégiques." },
+  { id:"s2", dim:"strategique", texte:"Je partage les choix d'orientation et les arbitrages stratégiques, y compris ceux qui m'ont été difficiles.", context:"Les décisions qui touchent l'équipe doivent être expliquées, pas seulement annoncées." },
+  { id:"s3", dim:"strategique", texte:"Mes collaborateurs connaissent les opportunités de développement de l'organisation, pas seulement leurs propres perspectives.", context:"Roadmap produit, marchés visés, alliances potentielles — autant d'éléments qui donnent du sens." },
+  { id:"s4", dim:"strategique", texte:"Je partage les incertitudes et les zones d'ombre stratégiques plutôt que de feindre une clarté que je n'ai pas.", context:"Un manager qui prétend tout savoir perd en crédibilité ce qu'il croit gagner en autorité." },
+  { id:"s5", dim:"strategique", texte:"Mes collaborateurs sont impliqués dans les réflexions stratégiques qui les concernent, pas seulement informés après coup.", context:"Participation vs information : c'est le passage de la transparence à la coresponsabilité." },
+  { id:"s6", dim:"strategique", texte:"Je communique les défis organisationnels auxquels je suis moi-même confronté en tant que manager.", context:"Montrer ses propres contraintes hiérarchiques désacralise la fonction et crée de l'empathie." },
+  { id:"r1", dim:"relationnelle", texte:"Je donne du feedback régulier et concret, pas seulement lors des entretiens annuels.", context:"Fréquence, qualité, équilibre positif/négatif — le feedback est le sel de la transparence relationnelle." },
+  { id:"r2", dim:"relationnelle", texte:"J'assume mes erreurs managériales devant mon équipe quand elles se produisent.", context:"La reconnaissance de l'erreur par le manager donne la permission à l'équipe d'en faire autant." },
+  { id:"r3", dim:"relationnelle", texte:"Je communique mes propres difficultés, mes doutes et mes limites quand c'est pertinent.", context:"Vulnérabilité managériale : l'authenticité crée plus de confiance que la posture de force permanente." },
+  { id:"r4", dim:"relationnelle", texte:"Mes collaborateurs savent comment je fonctionne, ce qui m'énerve, mes zones d'exigence et mes modes de travail.", context:"Un « manuel d'utilisation » du manager réduit les malentendus et la peur d'interagir." },
+  { id:"r5", dim:"relationnelle", texte:"Ce que je dis en réunion est cohérent avec ce que je dis en tête-à-tête.", context:"La dissonance entre discours public et privé est l'une des formes les plus destructrices d'opacité." },
+  { id:"r6", dim:"relationnelle", texte:"Quand je change d'avis ou de priorité, je l'explique plutôt que d'appliquer le changement en silence.", context:"Les changements silencieux génèrent de l'insécurité. L'explication transforme le virage en confiance." },
+  { id:"m1", dim:"temporelle", texte:"Je communique rapidement les changements de priorité et leurs raisons, sans laisser l'équipe dans le flou.", context:"Le silence lors des virages est l'une des sources de méfiance les plus courantes." },
+  { id:"m2", dim:"temporelle", texte:"Mes collaborateurs connaissent les vraies échéances — pas des marges artificielles que je crée pour me protéger.", context:"Les marges cachées créent un système de méfiance dès qu'elles sont découvertes." },
+  { id:"m3", dim:"temporelle", texte:"Je partage mes propres contraintes de temps et d'agenda plutôt que de disparaître dans des réunions inexpliquées.", context:"L'indisponibilité non expliquée génère des interprétations négatives inutiles." },
+  { id:"m4", dim:"temporelle", texte:"Je partage honnêtement les tensions entre les urgences court terme et les projets de fond à long terme.", context:"La lucidité sur les tensions temporelles permet à l'équipe d'arbitrer avec vous plutôt que de subir." },
+  { id:"m5", dim:"temporelle", texte:"Mes collaborateurs comprennent les rythmes de l'organisation — les saisons de pression, les périodes de respiration.", context:"La prévisibilité des cycles réduit l'anxiété et améliore la préparation collective." },
+  { id:"m6", dim:"temporelle", texte:"Quand un projet est retardé ou annulé, j'annonce et j'explique rapidement plutôt d'attendre que l'information fuite.", context:"La transparence sur les mauvaises nouvelles partagée tôt est moins destructrice qu'un retard découvert." },
+];
+
+const ECHELLE = [
+  { val:1, label:"Jamais",  bg:"#C0392B", txt:"#fff" },
+  { val:2, label:"Rarement",bg:"#B05A28", txt:"#fff" },
+  { val:3, label:"Parfois", bg:"#907018", txt:"#fff" },
+  { val:4, label:"Souvent", bg:"#3A7A40", txt:"#fff" },
+  { val:5, label:"Toujours",bg:"#2A6090", txt:"#fff" },
+];
+
+const NIVEAUX = [
+  { num:0, nom:"Opacité",          color:"#E05252", bg:"rgba(224,82,82,.1)",   range:[6,30],
+    desc:"La transparence est quasi absente. L'information est retenue par réflexe ou conviction hiérarchique. Ce modèle génère méfiance, rumeurs et désengagement progressif.",
+    conseil:"Commencez par partager les contraintes et le « pourquoi » de vos décisions lors de votre prochaine réunion d'équipe. Un seul geste change la dynamique.",
+    action:"Cette semaine : expliquez une décision récente en détaillant les 3 critères qui vous ont guidé." },
+  { num:1, nom:"Minimale",         color:"#E07040", bg:"rgba(224,112,64,.1)",  range:[31,54],
+    desc:"Vous partagez l'essentiel mais restez sur vos gardes. Votre équipe sait ce qu'elle doit faire sans toujours comprendre pourquoi. Le manque d'accès aux indicateurs limite son autonomie.",
+    conseil:"Ouvrez progressivement l'accès aux indicateurs de performance. Partagez les résultats en temps réel plutôt qu'en fin de période.",
+    action:"Cette semaine : créez ou partagez un tableau de bord d'équipe accessible à tous." },
+  { num:2, nom:"Des critères",     color:"#C89030", bg:"rgba(200,144,48,.1)",  range:[55,78],
+    desc:"Vous expliquez votre logique et vos critères. Votre équipe comprend la philosophie sans voir tous les chiffres. Niveau solide. La prochaine marche : la dimension stratégique.",
+    conseil:"Renforcez la transparence tactique — partagez les retours clients et les analyses — puis progressez vers les enjeux stratégiques qui donnent du sens au quotidien.",
+    action:"Cette semaine : partagez un retour client ou une analyse concurrentielle en réunion d'équipe." },
+  { num:3, nom:"Des fourchettes",  color:"#5AAA60", bg:"rgba(90,170,96,.1)",   range:[79,102],
+    desc:"Vous pratiquez une transparence substantielle. Votre équipe prend des décisions plus autonomes. C'est le niveau attendu par la directive (UE) 2023/970 pour juin 2026.",
+    conseil:"Consolidez la transparence relationnelle — feedback régulier, reconnaissance des erreurs, cohérence public/privé — pour ancrer la confiance qui rend la coresponsabilité durable.",
+    action:"Cette semaine : instaurez un rituel de feedback hebdomadaire de 15 minutes." },
+  { num:4, nom:"Interne totale",   color:"#4A90D0", bg:"rgba(74,144,208,.1)",  range:[103,126],
+    desc:"Vous pratiquez une transparence avancée sur les cinq dimensions. Vos collaborateurs comprennent les enjeux en profondeur. Ce niveau crée une coresponsabilité authentique.",
+    conseil:"Maintenez cette transparence sous pression — budget serré, décisions difficiles, réorganisations. C'est là qu'elle se prouve ou s'effrite.",
+    action:"Cette semaine : testez votre transparence sous pression en partageant une contrainte difficile." },
+  { num:5, nom:"Radicale",         color:"#8A70E0", bg:"rgba(138,112,224,.1)", range:[127,150],
+    desc:"Vous incarnez la transparence managériale dans toutes ses dimensions avec une cohérence remarquable. Votre équipe fonctionne en partenaire de confiance.",
+    conseil:"Votre rôle : essaimer. Partagez vos pratiques, accompagnez d'autres managers, devenez un référent de la culture de transparence dans votre organisation.",
+    action:"Cette semaine : documentez une pratique de transparence qui fonctionne et partagez-la avec un collègue." },
+];
+
+const RECOS = {
+  0: [
+    { t:"Choisir une réunion laboratoire", etapes:["Sélectionnez une décision récente que vous avez prise sans l'expliquer","Présentez-la à votre équipe en détaillant les 3 contraintes qui vous ont guidé","Observez et notez les réactions — méfiance, soulagement, questions ?"], c:"#E05252" },
+    { t:"Le « pourquoi » avant le « quoi »", etapes:["Choisissez une mission à déléguer cette semaine","Avant d'expliquer le « comment », expliquez le contexte, l'enjeu et pourquoi cette mission compte","Vérifiez que la personne a bien compris le sens, pas seulement la tâche"], c:"#E07040" },
+    { t:"Identifier vos réticences profondes", etapes:["Listez 3 informations que vous retenez habituellement","Pour chacune, posez-vous : est-ce une vraie raison (confidentialité, sécurité) ou un réflexe de contrôle ?","Commencez à partager celle qui comporte le moins de risque réel"], c:"#C89030" }
+  ],
+  1: [
+    { t:"Ouvrir le tableau de bord d'équipe", etapes:["Identifiez les 3 indicateurs clés que votre équipe ne voit pas en temps réel","Créez ou partagez un accès direct — même un fichier simple suffit pour commencer","Expliquez en réunion comment lire ces indicateurs et ce qu'ils signifient"], c:"#E07040" },
+    { t:"La séance retours clients", etapes:["Sélectionnez un vrai retour client — positif ou négatif — reçu cette semaine","Lisez-le en réunion d'équipe, sans filtre","Analysez ensemble : qu'est-ce que cela nous dit sur notre travail ?"], c:"#5AAA60" },
+    { t:"Expliquer un résultat décevant", etapes:["Choisissez un résultat récent inférieur aux attentes","Présentez-le avec ses vraies causes, sans minimiser ni chercher un coupable","Invitez l'équipe à proposer une analyse collective"], c:"#C89030" }
+  ],
+  2: [
+    { t:"Session « enjeux stratégiques »", etapes:["Planifiez 45 minutes en dehors de l'agenda habituel","Partagez 2 ou 3 enjeux économiques ou stratégiques que vous portez seul","Invitez l'équipe à réagir — pas à décider, mais à comprendre"], c:"#C89030" },
+    { t:"Instaurer le rituel de feedback", etapes:["Annoncez en réunion l'instauration d'un tour de 15 min le vendredi","Commencez vous-même : une réussite, une difficulté, un besoin de votre semaine","Tenez le cap 4 semaines, même quand c'est inconfortable"], c:"#5AAA60" },
+    { t:"Nommer vos contraintes à voix haute", etapes:["La prochaine fois que vous refusez une demande, préparez l'explication de la contrainte réelle","Dites « Je ne peux pas parce que… » plutôt que « Ce n'est pas possible »","Notez la différence de réaction dans l'équipe"], c:"#4A90D0" }
+  ],
+  3: [
+    { t:"La question directe", etapes:["En réunion d'équipe : posez la question « Qu'est-ce que vous aimeriez savoir que vous ne savez pas ? »","Notez les réponses sans vous justifier dans l'instant","Traitez chaque réponse la semaine suivante avec une décision claire : je partage / je ne peux pas partager / je vais voir"], c:"#5AAA60" },
+    { t:"Auditer la cohérence public/privé", etapes:["Après votre prochaine réunion d'équipe, notez les 3 messages principaux que vous avez passés","Comparez-les avec ce que vous dites en tête-à-tête sur les mêmes sujets","Identifiez et réduisez les écarts — ils sont la source principale de méfiance"], c:"#4A90D0" },
+    { t:"Partager une vraie incertitude", etapes:["Identifiez un sujet stratégique sur lequel vous n'avez pas de réponse","Présentez-le à l'équipe comme une incertitude réelle, pas un problème à résoudre","Invitez les hypothèses — sans promettre que l'équipe décidera"], c:"#8A70E0" }
+  ],
+  4: [
+    { t:"Le test de résistance sous pression", etapes:["Identifiez la prochaine décision difficile que vous devez annoncer","Préparez comment la partager avec transparence avant qu'elle n'arrive","Annoncez-la vous-même, avant que l'information ne fuite"], c:"#4A90D0" },
+    { t:"Codesigner les rituels de transparence", etapes:["Organisez 30 minutes avec l'équipe pour co-définir vos rituels : quels indicateurs partager, à quelle fréquence, sous quelle forme","Laissez l'équipe proposer et tranchez ensemble","Révisez dans 6 semaines"], c:"#8A70E0" },
+    { t:"Documenter et transmettre", etapes:["Rédigez en une page vos 3 pratiques de transparence qui fonctionnent le mieux","Partagez-les avec un collègue manager ou en réunion de pairs","Proposez un échange de pratiques — c'est le début de l'essaimage culturel (chapitre 13)"], c:"#5AAA60" }
+  ],
+  5: [
+    { t:"Devenir référent transparence", etapes:["Identifiez un manager de votre organisation qui souhaite progresser sur la transparence","Proposez-lui 3 séances d'échange de pratiques d'une heure","Documentez ce que vous observez : c'est votre propre capital managérial"], c:"#8A70E0" },
+    { t:"Mesurer l'impact systémique", etapes:["Définissez 3 indicateurs qualitatifs de l'impact de votre transparence : autonomie décisionnelle, qualité des initiatives spontanées, niveau de confiance perçu","Évaluez-les tous les trimestres informellement","Ajustez vos pratiques en fonction des signaux faibles"], c:"#5AAA60" },
+    { t:"La transparence organisationnelle", etapes:["Identifiez une pratique de transparence que vous pourriez proposer à votre organisation au-delà de votre équipe","Construisez un cas court (5 min de présentation) pour la proposer à votre N+1 ou en CODIR","C'est l'objet du chapitre 13 : passer de l'équipe à l'organisation"], c:"#4A90D0" }
+  ],
+};
+
+const PROFILS_MANAGER = {
+  0: { titre:"Le manager forteresse", desc:"Vous gérez en silo. L'information est une ressource que vous protégez, consciemment ou non. Votre équipe travaille dans le brouillard : elle exécute sans comprendre. Ce mode génère de l'efficacité à court terme et de la dépendance à long terme. Les collaborateurs talentueux partent en premier, car ce sont eux qui ont le plus besoin de sens.", signal:"Signal caractéristique : vos collaborateurs vous posent souvent les mêmes questions ou prennent des décisions à côté de ce que vous attendiez — non par incompétence, mais par manque d'information.", icon:"🏰" },
+  1: { titre:"Le manager filtre", desc:"Vous partagez ce que vous jugez nécessaire, pas plus. Vous avez un instinct protecteur qui vous pousse à filtrer l'information pour « ne pas inquiéter » ou « ne pas perdre le contrôle ». Vos collaborateurs ressentent cette retenue et comblent les manques par des interprétations — souvent plus anxiogènes que la réalité.", signal:"Signal caractéristique : des rumeurs circulent dans votre équipe sur des sujets que vous pensez avoir traités. L'information est là, mais mal calibrée.", icon:"🔽" },
+  2: { titre:"Le manager pédagogue", desc:"Vous expliquez votre logique et vos critères. Vos collaborateurs comprennent votre façon de penser, même s'ils n'ont pas accès à tous les chiffres. C'est un niveau solide qui donne de la lisibilité. Votre limite : la transparence reste descendante — vous expliquez, mais vous n'ouvrez pas encore les espaces de dialogue sur les enjeux.", signal:"Signal caractéristique : vos collaborateurs comprennent vos décisions mais ne se sentent pas encore partenaires de leur formulation.", icon:"📖" },
+  3: { titre:"Le manager partenaire", desc:"Vous pratiquez une transparence substantielle et progressive. Votre équipe accède aux indicateurs, aux retours clients et à une part des enjeux stratégiques. Ce niveau est rare : il crée une autonomie décisionnelle réelle. La directive (UE) 2023/970 reconnaît ce niveau comme le standard attendu pour 2026.", signal:"Signal caractéristique : vos collaborateurs prennent des décisions adaptées sans vous consulter et s'approprient les objectifs collectifs.", icon:"🤝" },
+  4: { titre:"Le manager écosystème", desc:"Vous avez fait de la transparence une culture, pas une pratique. Vos collaborateurs comprennent les enjeux en profondeur — opérationnels, tactiques, stratégiques, relationnels et temporels. Ce niveau transforme une équipe en communauté de pratique, où chacun arbitre avec la même information que vous.", signal:"Signal caractéristique : vos collaborateurs vous challengent sur vos propres décisions avec des arguments pertinents. C'est une réussite, pas une menace.", icon:"🌿" },
+  5: { titre:"Le manager régénératif total", desc:"Vous incarnez la transparence managériale comme principe de vie au travail. Votre équipe fonctionne en partenaire de confiance et prend des décisions de qualité parce qu'elle comprend exactement les enjeux. Vous êtes un modèle rare. Votre prochain défi n'est plus personnel — c'est l'essaimage.", signal:"Signal caractéristique : d'autres équipes cherchent à s'inspirer de vos pratiques. Des collègues managers vous demandent conseil.", icon:"✦" },
+};
+
+const DIRECTIVE_INFO = {
+  0: { titre:"Ce que la directive change pour vous — et pourquoi c'est urgent", texte:"La directive (UE) 2023/970 impose à toutes les entreprises dès 1 salarié de communiquer une fourchette de rémunération avant le premier entretien de recrutement, d'interdire de demander l'historique salarial des candidats, et de rendre accessibles les critères de rémunération. Pour votre niveau d'opacité actuel, cette directive représente un choc réglementaire important. Le risque immédiat : des candidats refusant vos offres sans fourchette affichée, des salariés demandant des justifications que vous n'avez pas formalisées, et des sanctions dès juin 2026.", urgence:"Votre priorité réglementaire : formaliser et communiquer les critères de rémunération par poste avant toute autre démarche de transparence." },
+  1: { titre:"Ce que la directive change pour vous", texte:"Vous satisfaites à l'obligation minimale (chaque salarié connaît son salaire), mais la directive va bien au-delà. Elle impose la communication de fourchettes salariales aux candidats avant entretien, l'accès des salariés aux niveaux moyens de rémunération par catégorie et par sexe, et l'interdiction de demander l'historique salarial. Ce passage du niveau 1 au niveau 3 est obligatoire d'ici juin 2026 pour les entreprises de 50+ salariés.", urgence:"Votre priorité réglementaire : documenter et communiquer les fourchettes salariales par poste. C'est la base de la conformité 2026." },
+  2: { titre:"La directive confirme votre direction — et l'accélère", texte:"Vous êtes sur la bonne voie. Vos critères de rémunération sont expliqués, ce qui correspond à l'esprit de la directive. Mais le texte exige deux éléments supplémentaires que vous n'avez probablement pas encore : les fourchettes accessibles aux candidats avant entretien, et le droit des salariés à connaître les niveaux moyens de rémunération par sexe et par catégorie. L'objectif juin 2026 est à portée si vous accélérez.", urgence:"Votre priorité réglementaire : passer des critères expliqués aux fourchettes publiées, en interne d'abord, dans les offres d'emploi ensuite." },
+  3: { titre:"Vous êtes dans la cible de la directive", texte:"Le niveau 3 est précisément ce que la directive (UE) 2023/970 impose aux entreprises de 50+ salariés d'ici juin 2026 : transparence des fourchettes aux candidats, accès aux médianes pour les salariés, publication des indicateurs d'écart F/H. Vous avez probablement l'essentiel. Il vous reste à vérifier que la transparence est formalisée (pas seulement pratiquée), documentée et auditable. La directive prévoit des sanctions allant jusqu'à 1% de la masse salariale et l'exclusion des marchés publics.", urgence:"Votre priorité réglementaire : audit de conformité et documentation formelle de vos pratiques de transparence salariale." },
+  4: { titre:"Vous dépassez les exigences de la directive", texte:"La directive (UE) 2023/970 impose le niveau 3. Vous êtes au niveau 4. Votre défi n'est pas réglementaire — c'est culturel. Comment maintenir cette transparence lors des moments de pression organisationnelle ? Comment la diffuser au-delà de votre équipe ? La directive peut être un levier pour convaincre votre direction que votre approche est à la fois éthique et conforme.", urgence:"Votre priorité réglementaire : documenter vos pratiques pour faciliter l'audit de conformité et servir de modèle interne." },
+  5: { titre:"Vous êtes un modèle de conformité avancée", texte:"La directive (UE) 2023/970 exige le niveau 3. Vous êtes au niveau 5. Votre organisation est non seulement conforme mais en avance significative. Ce positionnement est un avantage employeur réel — les candidats et les salariés choisissent de plus en plus les organisations transparentes. Votre rôle : documenter, partager et influencer les standards de votre secteur.", urgence:"Votre opportunité : faire de votre niveau de transparence un argument de marque employeur et un levier de différenciation sur le marché des talents." },
+};
+
+function getTotalScore(rep) { return QUESTIONS.reduce((s,q)=>s+(rep[q.id]||0),0); }
+function getDimScore(rep,id) { return QUESTIONS.filter(q=>q.dim===id).reduce((s,q)=>s+(rep[q.id]||0),0); }
+function getDimMax(id) { return QUESTIONS.filter(q=>q.dim===id).length*5; }
+function getNiveau(score) { return NIVEAUX.find(n=>score>=n.range[0]&&score<=n.range[1])||NIVEAUX[0]; }
+function getDimNiv(pct) {
+  if(pct>=.8) return {label:"Avancé",   color:"#5AAA60"};
+  if(pct>=.6) return {label:"Développé",color:"#C89030"};
+  if(pct>=.4) return {label:"Émergent", color:"#E07040"};
+  return {label:"À initier",color:"#E05252"};
+}
+function getDone(rep) { return QUESTIONS.filter(q=>rep[q.id]).length; }
+
+function generateWord(rep) {
+  const score=getTotalScore(rep),niv=getNiveau(score);
+  const profil=PROFILS_MANAGER[niv.num]||PROFILS_MANAGER[0];
+  const directive=DIRECTIVE_INFO[niv.num]||DIRECTIVE_INFO[0];
+  const recos=RECOS[niv.num]||RECOS[0];
+  const date=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+  let h=`<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><style>@page{size:A4;margin:2cm}body{font-family:Georgia,serif;font-size:11pt;color:#1A1A1A;line-height:1.7}h1{font-size:15pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:5px;margin-top:28px}h2{font-size:12pt;color:#2A3A2A;margin-top:16px;margin-bottom:6px}h3{font-size:11pt;color:#2A3A2A;margin-top:12px}table{border-collapse:collapse;width:100%;margin:10px 0}th{background:#1A3A28;color:#fff;padding:7px 10px;text-align:left;font-size:10pt}td{border:1px solid #ddd;padding:6px 10px;font-size:10pt}.box{padding:11px 15px;margin:10px 0;border-left:4px solid;background:#F9F7F3}.pb{page-break-before:always}.m{color:#666;font-style:italic}.et{padding:4px 0 4px 14px;font-size:10pt;color:#333;border-bottom:1px solid #eee}</style></head><body>`;
+  // COUVERTURE
+  h+=`<div style='text-align:center;margin-bottom:36px'><p style='font-size:18pt;font-weight:bold;color:#1A3A28'>POSITIONNEMENT DE TRANSPARENCE MANAGÉRIALE</p><p style='font-size:11pt;font-style:italic;color:#666;margin:6px 0'>Diagnostic personnel · Chapitre 10 · Management Régénératif</p><p style='font-size:10pt;color:#aaa'>${date}</p></div>`;
+  // SCORE
+  h+=`<h1>Résultat global</h1><p><span style='font-size:26pt;font-weight:bold;color:${niv.color}'>${score}</span><span style='color:#aaa;font-size:12pt'> / 150 points</span></p><p style='margin:8px 0'><span style='display:inline-block;padding:4px 16px;border-radius:10px;color:#fff;font-weight:bold;background:${niv.color}'>Niveau ${niv.num} — ${niv.nom}</span></p><p class='m' style='margin:12px 0'>${niv.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Action cette semaine :</strong> ${niv.action}</div>`;
+  // PROFIL
+  h+=`<div class='pb'></div><h1>Votre profil de manager</h1><h2>${profil.icon} ${profil.titre}</h2><p>${profil.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div>`;
+  // DIRECTIVE
+  h+=`<div class='pb'></div><h1>La directive (UE) 2023/970 et votre situation</h1><h2>${directive.titre}</h2><p>${directive.texte}</p><div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div>`;
+  // SCORES PAR DIMENSION
+  h+=`<h1>Scores par dimension</h1><table><tr><th>Dimension</th><th>Score</th><th>Niveau</th></tr>`;
+  DIMENSIONS.forEach(d=>{const s=getDimScore(rep,d.id),max=getDimMax(d.id),nv=getDimNiv(s/max);h+=`<tr><td><strong>${d.icon} ${d.label}</strong><br><span style='font-size:9pt;color:#666'>${d.chapRef}</span></td><td style='text-align:center;font-weight:bold;color:${nv.color}'>${s}/${max}</td><td style='color:${nv.color};font-weight:bold'>${nv.label}</td></tr>`;});
+  h+=`</table>`;
+  // PRÉCONISATIONS
+  h+=`<div class='pb'></div><h1>Vos 3 préconisations prioritaires</h1><div class='box' style='border-color:${niv.color}'>${niv.conseil}</div>`;
+  recos.forEach((r,i)=>{
+    h+=`<h2>${i+1}. ${r.t}</h2>`;
+    r.etapes.forEach((e,j)=>{h+=`<div class='et'><strong>Étape ${j+1} :</strong> ${e}</div>`;});
+  });
+  // CONTACT
+  h+=`<div class='pb'></div><h1>Aller plus loin avec Benjamin Chaminade</h1><p>Benjamin Chaminade accompagne les managers et les organisations dans leur transformation régénérative. Diagnostic approfondi, accompagnement sur-mesure, conférences et ateliers sur le management régénératif.</p><div class='box' style='border-color:#3A6B4A;background:#F0F8F2'><strong>Contact :</strong> <a href='https://benjaminchaminade.com/contact/'>benjaminchaminade.com/contact</a></div>`;
+  // DÉTAIL QUESTIONS
+  h+=`<div class='pb'></div><h1>Détail de vos réponses par dimension</h1>`;
+  DIMENSIONS.forEach(d=>{
+    const dq=QUESTIONS.filter(q=>q.dim===d.id);
+    h+=`<h2>${d.icon} ${d.label}</h2><p class='m'>${d.desc}</p><table><tr><th>Question</th><th style='width:90px'>Réponse</th></tr>`;
+    dq.forEach(q=>{const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);h+=`<tr><td style='font-size:9.5pt'>${q.texte}</td><td style='text-align:center;color:${e?e.bg:"#aaa"};font-weight:bold'>${v}/5<br><span style='font-size:8pt'>${e?e.label:"N/A"}</span></td></tr>`;});
+    h+=`</table>`;
+  });
+  h+=`<p class='m' style='margin-top:28px'>Management Régénératif · Benjamin Chaminade · questionnaire-transparence.html</p></body></html>`;
+  const blob=new Blob([h],{type:"application/msword"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;
+  a.download=`Transparence_Managériale_N${niv.num}_${new Date().toISOString().slice(0,10)}.doc`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+// ── COMPOSANTS ────────────────────────────────────────────────
+
+function App() {
+  const [rep, setRep] = useState({});
+  const [dim, setDim] = useState("operationnelle");
+  const [phase, setPhase] = useState("intro"); // intro | quiz | results
+  const [resTab, setResTab] = useState("profil");
+
+  const curDim = DIMENSIONS.find(d=>d.id===dim);
+  const dimQs = QUESTIONS.filter(q=>q.dim===dim);
+  const done = getDone(rep);
+  const allDone = done === QUESTIONS.length;
+  const score = getTotalScore(rep);
+  const niv = getNiveau(score);
+  const dimIdx = DIMENSIONS.findIndex(d=>d.id===dim);
+
+  // ── INTRO ──────────────────────────────────────
+  if (phase==="intro") return (
+    <div className="app">
+      <div className="header">
+        <div className="header-bg-num">T</div>
+        <div className="header-tag">Chapitre 10 · Management Régénératif</div>
+        <h1>Votre niveau de <em>transparence</em> managériale</h1>
+        <div className="header-divider" />
+        <p className="sub">30 questions · 5 dimensions · un positionnement sur l'échelle de transparence du management régénératif. Pas un score de performance — une boussole pour progresser.</p>
+      </div>
+
+      <div className="ladder">
+        {NIVEAUX.map(n=>(
+          <div key={n.num} className="ladder-step" style={{borderColor:`${n.color}30`}}>
+            <div className="ls-num" style={{color:n.color}}>{n.num}</div>
+            <div className="ls-label" style={{color:n.color}}>{n.nom}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="intro-card">
+        <h2>5 dimensions, 30 questions</h2>
+        <p>Ce questionnaire évalue votre transparence managériale au sens du chapitre 10 du livre — la transparence comme condition de la coresponsabilité, pas seulement comme obligation légale.</p>
+        <div className="dims-grid">
+          {DIMENSIONS.map(d=>(
+            <div key={d.id} className="dim-pill" style={{borderColor:`${d.color}30`,background:`${d.color}08`}}>
+              <div className="dim-pill-name" style={{color:d.color}}>{d.icon} {d.label}</div>
+              <div className="dim-pill-desc">{d.desc.slice(0,75)}…</div>
+            </div>
+          ))}
+        </div>
+        <div className="note-box">
+          <strong>Résultat :</strong> un score sur 150, un profil par dimension, 3 actions concrètes adaptées à votre niveau. Téléchargement Word disponible.
+        </div>
+      </div>
+
+      <div style={{textAlign:"center",paddingTop:8}}>
+        <button className="btn-start" onClick={()=>setPhase("quiz")}>
+          Démarrer <span style={{fontSize:"1.2rem"}}>→</span>
+        </button>
+        <div style={{fontSize:".75rem",color:"var(--muted)",marginTop:12}}>environ 8 minutes · aucune donnée collectée</div>
+      </div>
+
+      <div className="foot">Management Régénératif · Benjamin Chaminade</div>
+    </div>
+  );
+
+  // ── QUIZ ───────────────────────────────────────
+  if (phase==="quiz") return (
+    <div className="app">
+      <div style={{marginBottom:24}}>
+        <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.4rem",color:"var(--text)",marginBottom:6}}>Transparence managériale</h1>
+        <p style={{fontSize:".8rem",color:"var(--muted)"}}>Répondez honnêtement — ce diagnostic n'a de valeur que si vous vous autorisez à voir ce qui est.</p>
+      </div>
+
+      {/* progress */}
+      <div className="progress-wrap">
+        <div className="progress-meta"><span>{done} / {QUESTIONS.length} réponses</span><span>{Math.round((done/QUESTIONS.length)*100)}%</span></div>
+        <div className="pbar"><div className="pbar-fill" style={{width:Math.round((done/QUESTIONS.length)*100)+"%"}} /></div>
+      </div>
+
+      {/* dim tabs */}
+      <div className="dim-tabs">
+        {DIMENSIONS.map(d=>{
+          const dq=QUESTIONS.filter(q=>q.dim===d.id);
+          const dd=dq.filter(q=>rep[q.id]).length;
+          const isActive=dim===d.id;
+          return (
+            <div key={d.id} className={`dim-tab ${isActive?"active":""} ${dd===dq.length&&!isActive?"done":""}`}
+              style={{color:isActive?d.color:"var(--muted)"}}
+              onClick={()=>setDim(d.id)}>
+              <div style={{fontSize:"1rem",marginBottom:2}}>{d.icon}</div>
+              <div>{d.label}</div>
+              <div style={{fontSize:".58rem",marginTop:2,opacity:.7}}>{dd}/{dq.length}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* dim header */}
+      <div className="dim-header" style={{borderColor:`${curDim.color}30`,background:`${curDim.color}08`}}>
+        <div className="dim-header-name" style={{color:curDim.color}}>{curDim.icon} {curDim.label}</div>
+        <div className="dim-header-desc">{curDim.desc}</div>
+        <div className="dim-header-ref" style={{color:curDim.color}}>{curDim.chapRef}</div>
+      </div>
+
+      {/* questions */}
+      {dimQs.map((q,i)=>{
+        const val=rep[q.id]||0;
+        return (
+          <div key={q.id} className={`q-card ${val?"answered":""}`} style={val?{borderColor:`${curDim.color}40`}:{}}>
+            <div className="q-num">Q{i+1} / {dimQs.length}</div>
+            <div className="q-text">{q.texte}</div>
+            {q.context && <div className="q-context">{q.context}</div>}
+            <div className="rating-wrap">
+              {ECHELLE.map(e=>(
+                <button key={e.val} className={`rb ${val===e.val?"sel":""}`}
+                  style={val===e.val?{background:e.bg}:{}}
+                  onClick={()=>setRep(prev=>({...prev,[q.id]:e.val}))}>
+                  <span className="rb-val" style={val===e.val?{color:"#fff"}:{color:e.bg}}>{e.val}</span>
+                  <span style={val===e.val?{color:"rgba(255,255,255,.85)"}:{}}>{e.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+      <div className="nav-btns">
+        <div>
+          {dimIdx>0 && <button className="btn btn-sec" onClick={()=>setDim(DIMENSIONS[dimIdx-1].id)}>← Précédent</button>}
+        </div>
+        <div style={{display:"flex",gap:10}}>
+          {dimIdx<DIMENSIONS.length-1
+            ? <button className="btn btn-next" onClick={()=>{setDim(DIMENSIONS[dimIdx+1].id);window.scrollTo({top:0,behavior:"smooth"});}}>Suivant →</button>
+            : <button className="btn btn-next" disabled={!allDone} onClick={()=>{setPhase("results");window.scrollTo({top:0,behavior:"smooth"});}}>
+                {allDone?"Voir mes résultats →":`Encore ${QUESTIONS.length-done} question(s)`}
+              </button>
+          }
+        </div>
+      </div>
+
+      <div className="foot">Management Régénératif · Benjamin Chaminade</div>
+    </div>
+  );
+
+  // ── RESULTS ────────────────────────────────────
+  const recos = RECOS[niv.num]||RECOS[0];
+  const profil = PROFILS_MANAGER[niv.num]||PROFILS_MANAGER[0];
+  const directive = DIRECTIVE_INFO[niv.num]||DIRECTIVE_INFO[0];
+
+  return (
+    <div className="app">
+      <div style={{textAlign:"center",marginBottom:32,paddingTop:20}}>
+        <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.6rem",color:"var(--text)",marginBottom:6}}>Votre diagnostic de transparence</h1>
+        <p style={{fontSize:".85rem",color:"var(--muted)"}}>Chapitre 10 · Management Régénératif</p>
+      </div>
+
+      {/* ── HERO ── */}
+      <div className="result-hero" style={{borderColor:`${niv.color}30`}}>
+        <div className="result-hero-bg" style={{color:niv.color}}>{niv.num}</div>
+        <div className="result-niv-tag" style={{background:niv.bg,color:niv.color,border:`1px solid ${niv.color}40`}}>
+          Niveau {niv.num}
+        </div>
+        <div className="result-niv-name" style={{color:niv.color}}>{niv.nom}</div>
+        <div className="result-score">{score} points / 150</div>
+        <div className="result-scorebar">
+          <div className="result-scorefill" style={{width:Math.round((score/150)*100)+"%",background:niv.color}} />
+        </div>
+        <div className="result-desc">{niv.desc}</div>
+        <div className="result-action" style={{borderColor:`${niv.color}40`,background:niv.bg}}>
+          <div className="result-action-label" style={{color:niv.color}}>Action cette semaine</div>
+          <p style={{color:"var(--text)",fontSize:".88rem"}}>{niv.action}</p>
+        </div>
+        {/* TÉLÉCHARGEMENT WORD */}
+        <button className="btn btn-dl" onClick={()=>generateWord(rep)}
+          style={{marginTop:4}}>
+          ↓ Télécharger le rapport Word
+        </button>
+        <p style={{fontSize:".7rem",color:"var(--muted)",marginTop:8}}>
+          Rapport personnalisé avec profil, scores par dimension et préconisations détaillées
+        </p>
+      </div>
+
+      {/* ── TABS ── */}
+      <div className="res-tabs">
+        {[["profil","◉ Mon profil"],["synthese","◈ Par dimension"],["directive","⚖ Directive 2026"],["recos","◎ Préconisations"],["detail","≡ Détail"]].map(([t,l])=>(
+          <button key={t} className={`res-tab ${resTab===t?"active":""}`} onClick={()=>setResTab(t)}>{l}</button>
+        ))}
+      </div>
+
+      {/* ── 1. PROFIL DE MANAGER ── */}
+      {resTab==="profil" && (
+        <div>
+          <div style={{background:"var(--bg2)",border:`1px solid ${niv.color}30`,borderRadius:16,padding:"32px 28px",marginBottom:16,position:"relative",overflow:"hidden"}}>
+            <div style={{position:"absolute",top:-10,right:-10,fontFamily:"'Playfair Display',serif",fontSize:120,fontWeight:900,opacity:.04,color:niv.color,lineHeight:1,pointerEvents:"none"}}>{profil.icon}</div>
+            <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:niv.color,marginBottom:10}}>Votre profil de manager · Niveau {niv.num}</div>
+            <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.6rem",color:"var(--text)",marginBottom:16,letterSpacing:"-.01em"}}>{profil.icon} {profil.titre}</h2>
+            <p style={{fontSize:".93rem",color:"var(--muted)",lineHeight:1.8,marginBottom:20}}>{profil.desc}</p>
+            <div style={{background:`${niv.color}10`,border:`1px solid ${niv.color}30`,borderRadius:10,padding:"14px 18px"}}>
+              <div style={{fontSize:".68rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".06em",color:niv.color,marginBottom:6}}>Signal caractéristique</div>
+              <p style={{fontSize:".86rem",color:"var(--text)",fontStyle:"italic",lineHeight:1.65}}>{profil.signal}</p>
+            </div>
+          </div>
+
+          {/* Positionnement sur l'échelle */}
+          <div style={{background:"var(--bg2)",border:"1px solid var(--border)",borderRadius:14,padding:"24px 28px",marginBottom:16}}>
+            <div style={{fontSize:".72rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".07em",color:"var(--muted)",marginBottom:16}}>L'échelle des 6 profils</div>
+            {NIVEAUX.map(n=>(
+              <div key={n.num} style={{display:"flex",alignItems:"flex-start",gap:14,padding:"10px 0",borderBottom:"1px solid var(--faint)",opacity:n.num===niv.num?1:.45}}>
+                <div style={{width:28,height:28,borderRadius:"50%",background:n.num===niv.num?n.color:"var(--faint)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontFamily:"'Playfair Display',serif",fontWeight:700,fontSize:".85rem",color:n.num===niv.num?"var(--bg)":"var(--muted)"}}>
+                  {n.num}
+                </div>
+                <div style={{flex:1}}>
+                  <div style={{fontSize:".82rem",fontWeight:600,color:n.num===niv.num?n.color:"var(--muted)",marginBottom:2}}>
+                    {PROFILS_MANAGER[n.num]?.icon} {PROFILS_MANAGER[n.num]?.titre}
+                    {n.num===niv.num && <span style={{fontSize:".65rem",background:n.color,color:"var(--bg)",padding:"2px 8px",borderRadius:10,marginLeft:8,fontWeight:700}}>VOUS</span>}
+                  </div>
+                  <div style={{fontSize:".76rem",color:"var(--muted)",lineHeight:1.5}}>{n.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── 2. SYNTHÈSE PAR DIMENSION ── */}
+      {resTab==="synthese" && (
+        <div className="dim-scores-card">
+          <h2>Profil par dimension</h2>
+          {DIMENSIONS.map(d=>{
+            const s=getDimScore(rep,d.id),max=getDimMax(d.id),pct=s/max,nv=getDimNiv(pct);
+            return (
+              <div key={d.id} className="ds-row">
+                <div className="ds-head">
+                  <div className="ds-name" style={{color:d.color}}>{d.icon} {d.label} <span style={{fontSize:".7rem",color:"var(--muted)",fontWeight:400}}>{d.chapRef}</span></div>
+                  <div className="ds-val" style={{color:nv.color}}>{s}/{max}</div>
+                </div>
+                <div className="ds-bar"><div className="ds-fill" style={{width:Math.round(pct*100)+"%",background:d.color}} /></div>
+                <div className="ds-niv" style={{color:nv.color}}>{nv.label}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ── 3. DIRECTIVE ── */}
+      {resTab==="directive" && (
+        <div>
+          <div style={{background:"var(--bg2)",border:"1px solid rgba(74,144,208,.3)",borderRadius:16,padding:"28px",marginBottom:16}}>
+            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
+              <div style={{width:36,height:36,borderRadius:8,background:"rgba(74,144,208,.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.1rem"}}>⚖</div>
+              <div>
+                <div style={{fontSize:".68rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".07em",color:"#4A90D0"}}>Directive (UE) 2023/970 · Échéance juin 2026</div>
+                <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.15rem",color:"var(--text)",marginTop:2}}>{directive.titre}</h2>
+              </div>
+            </div>
+            <p style={{fontSize:".9rem",color:"var(--muted)",lineHeight:1.8,marginBottom:18}}>{directive.texte}</p>
+            <div style={{background:"rgba(74,144,208,.1)",border:"1px solid rgba(74,144,208,.25)",borderRadius:10,padding:"14px 18px"}}>
+              <div style={{fontSize:".68rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".06em",color:"#4A90D0",marginBottom:6}}>
+                {niv.num<=2 ? "Votre priorité réglementaire" : niv.num<=3 ? "Votre priorité réglementaire" : "Votre opportunité"}
+              </div>
+              <p style={{fontSize:".86rem",color:"var(--text)",lineHeight:1.65}}>{directive.urgence}</p>
+            </div>
+          </div>
+
+          {/* Tableau des obligations */}
+          <div style={{background:"var(--bg2)",border:"1px solid var(--border)",borderRadius:14,padding:"22px 24px",marginBottom:16}}>
+            <div style={{fontSize:".72rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".07em",color:"var(--muted)",marginBottom:16}}>Ce que la directive impose concrètement</div>
+            {[
+              { ob:"Afficher une fourchette salariale dans les offres d'emploi", niv:3, label:"Niveau 3 requis" },
+              { ob:"Interdire de demander l'historique salarial des candidats", niv:1, label:"Dès le niveau 1" },
+              { ob:"Permettre aux salariés d'accéder aux niveaux moyens de rémunération par sexe", niv:3, label:"Niveau 3 requis" },
+              { ob:"Justifier les écarts de rémunération supérieurs à 5%", niv:3, label:"Niveau 3 requis" },
+              { ob:"Publier des rapports d'écarts F/H (entreprises 100+)", niv:3, label:"Niveau 3 requis" },
+              { ob:"Répondre sous 2 mois aux demandes d'information salariale", niv:2, label:"Dès le niveau 2" },
+            ].map((item,i)=>{
+              const done = niv.num >= item.niv;
+              return (
+                <div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:"1px solid var(--faint)"}}>
+                  <div style={{width:22,height:22,borderRadius:"50%",background:done?"#5AAA60":"var(--faint)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:".7rem",color:done?"var(--bg)":"var(--muted)",fontWeight:700}}>
+                    {done?"✓":"·"}
+                  </div>
+                  <div style={{flex:1,fontSize:".82rem",color:done?"var(--text)":"var(--muted)"}}>{item.ob}</div>
+                  <div style={{fontSize:".65rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".04em",color:done?"#5AAA60":"var(--muted)",flexShrink:0}}>{item.label}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ── 4. PRÉCONISATIONS ── */}
+      {resTab==="recos" && (
+        <div>
+          <div className="conseil-box" style={{borderColor:`${niv.color}40`,background:niv.bg,marginBottom:20}}>
+            <div className="conseil-box-label" style={{color:niv.color}}>Conseil stratégique — Niveau {niv.num}</div>
+            <p style={{color:"var(--text)"}}>{niv.conseil}</p>
+          </div>
+          {recos.map((r,i)=>(
+            <div key={i} className="reco-card" style={{borderLeftColor:r.c,marginBottom:14}}>
+              <h3 style={{marginBottom:12}}>
+                <div className="step-dot" style={{background:r.c,color:"var(--bg)"}}>{i+1}</div>
+                {r.t}
+              </h3>
+              <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                {r.etapes.map((e,j)=>(
+                  <div key={j} style={{display:"flex",gap:10,fontSize:".84rem",color:"var(--muted)",lineHeight:1.6}}>
+                    <div style={{width:20,height:20,borderRadius:"50%",background:`${r.c}20`,border:`1px solid ${r.c}50`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontSize:".65rem",fontWeight:700,color:r.c,marginTop:2}}>
+                      {j+1}
+                    </div>
+                    <span>{e}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {/* CTA Benjamin */}
+          <div style={{background:"linear-gradient(135deg,rgba(90,170,96,.12),rgba(74,144,208,.12))",border:"1px solid rgba(90,170,96,.25)",borderRadius:16,padding:"28px 28px",marginTop:24,textAlign:"center"}}>
+            <div style={{fontSize:"1.5rem",marginBottom:10}}>✦</div>
+            <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.3rem",color:"var(--text)",marginBottom:10}}>Vous souhaitez aller plus loin ?</h2>
+            <p style={{fontSize:".88rem",color:"var(--muted)",marginBottom:18,maxWidth:480,margin:"0 auto 18px",lineHeight:1.75}}>
+              Benjamin Chaminade accompagne les managers et les organisations dans leur transformation vers un management régénératif. Diagnostic approfondi, parcours sur-mesure, conférences et ateliers.
+            </p>
+            <a href="https://benjaminchaminade.com/contact/" target="_blank" rel="noopener noreferrer"
+              style={{display:"inline-flex",alignItems:"center",gap:8,padding:"13px 28px",background:"#5AAA60",color:"#0D1A0F",borderRadius:10,fontFamily:"'Outfit',sans-serif",fontWeight:700,fontSize:".92rem",textDecoration:"none",transition:"all .2s"}}>
+              Contacter Benjamin Chaminade →
+            </a>
+            <p style={{fontSize:".7rem",color:"var(--muted)",marginTop:10}}>benjaminchaminade.com</p>
+          </div>
+        </div>
+      )}
+
+      {/* ── 5. DÉTAIL ── */}
+      {resTab==="detail" && DIMENSIONS.map(d=>{
+        const dq=QUESTIONS.filter(q=>q.dim===d.id);
+        return (
+          <div key={d.id} className="det-section" style={{borderColor:`${d.color}25`}}>
+            <div className="det-section-head" style={{color:d.color}}>{d.icon} {d.label}</div>
+            {dq.map(q=>{
+              const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);
+              return (
+                <div key={q.id} className="det-row">
+                  <div className="det-dot" style={{background:e?e.bg:"var(--faint)",color:"#fff"}}>{v}</div>
+                  <div className="det-txt">{q.texte}</div>
+                  <div className="det-val" style={{color:e?e.bg:"var(--muted)"}}>{e?e.label:"—"}</div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+
+      <div style={{textAlign:"center",marginTop:32,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+        <button className="btn btn-dl" onClick={()=>generateWord(rep)}>↓ Rapport Word</button>
+        <button className="btn btn-sec" onClick={()=>{setRep({});setDim("operationnelle");setPhase("intro");setResTab("profil");}}>Recommencer</button>
+      </div>
+
+      <div className="foot">
+        Management Régénératif · Benjamin Chaminade<br/>
+        Chapitre 10 — Coconstruire le présent · <a href="https://benjaminchaminade.com/contact/" target="_blank" rel="noopener noreferrer" style={{color:"var(--muted)"}}>Contact</a>
+      </div>
+    </div>
+  );
+}
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App/>);
+</script>
+</body>
+</html>
