@@ -699,135 +699,176 @@ function generateWord(rep) {
   const globalPct=Math.round(score/150*100);
 
   buildRadarPNG(rep, niv, (radarB64) => {
+    const globalPct=Math.round(score/150*100);
     const css=`
-body{font-family:Georgia,serif;font-size:11pt;color:#1A1A1A;line-height:1.75;margin:0}
-h1{font-size:14pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:4px;margin:0 0 14px}
-h2{font-size:12pt;color:#2A3A2A;margin:14px 0 6px}
-h3{font-size:11pt;color:#2A3A2A;margin:10px 0 4px}
-p{margin:0 0 10px}
+body{font-family:Georgia,serif;font-size:10.5pt;color:#1A1A1A;line-height:1.7;margin:0;padding:0}
+h1{font-size:13pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:5px;margin:0 0 16px}
+h2{font-size:11.5pt;color:#1A3A28;margin:18px 0 8px}
+p{margin:0 0 10px;font-size:10.5pt}
 table{border-collapse:collapse;width:100%;margin:10px 0}
-th{background:#1A3A28;color:#fff;padding:7px 10px;text-align:left;font-size:10pt}
-td{border:1px solid #ddd;padding:6px 10px;font-size:10pt;vertical-align:top}
-.box{padding:12px 16px;margin:10px 0;border-left:4px solid;background:#F9F7F3}
+th{background:#1A3A28;color:#fff;padding:6px 9px;text-align:left;font-size:9.5pt}
+td{border:1px solid #ddd;padding:5px 9px;font-size:10pt;vertical-align:top}
+.box{padding:11px 15px;margin:12px 0;border-left:4px solid;background:#F9F7F3;font-size:10.5pt}
 .m{color:#666;font-style:italic;font-size:10pt}
-.et{padding:5px 0 5px 16px;font-size:10pt;color:#333;border-bottom:1px solid #eee}
-.page{width:17cm;min-height:25.7cm;padding:2cm;box-sizing:border-box;page-break-after:always;position:relative}
+.et{padding:5px 0 5px 14px;font-size:10pt;color:#333;border-bottom:1px solid #eee}
+.page{width:21cm;min-height:29.7cm;box-sizing:border-box;page-break-after:always;position:relative;overflow:hidden}
 .page:last-child{page-break-after:avoid}
-.cover{text-align:center;padding-top:5cm}
-.foot{position:absolute;bottom:1.2cm;left:2cm;right:2cm;text-align:center;font-size:8.5pt;color:#999;border-top:1px solid #ddd;padding-top:6px}
+.body{padding:1.8cm 2cm 2.8cm}
+.foot{position:absolute;bottom:.8cm;left:2cm;right:2cm;text-align:center;font-size:8pt;color:#AAA;border-top:1px solid #E0E0E0;padding-top:5px}
+.badge{display:inline-block;padding:4px 14px;border-radius:18px;color:#fff;font-size:10pt;font-weight:bold}
+.sep{height:1px;background:#E8E8E8;margin:16px 0}
 @page{size:A4;margin:0}
 @media print{body{margin:0}}`;
 
-    const foot=`<div class='foot'>Diagnostic de transparence · Management Régénératif · Benjamin Chaminade</div>`;
-
+    const foot=`<div class='foot'>Diagnostic de transparence &nbsp;·&nbsp; Management Régénératif &nbsp;·&nbsp; Benjamin Chaminade</div>`;
     let h=`<!DOCTYPE html><html><head><meta charset='utf-8'><style>${css}</style></head><body>`;
 
-    // ── PAGE 1 : COUVERTURE ──────────────────────────────────
+    // PAGE 1 — COUVERTURE
     h+=`<div class='page'>
-<div class='cover'>
-  <p style='font-size:9pt;color:#888;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px'>Management Régénératif · Chapitre 10</p>
-  <p style='font-size:22pt;font-weight:bold;color:#1A3A28;margin:0 0 8px;line-height:1.2'>Positionnement de<br>transparence managériale</p>
-  <p style='font-size:13pt;font-style:italic;color:#666;margin:0 0 40px'>${date}</p>
-  <div style='display:inline-block;padding:8px 24px;border-radius:24px;background:${niv.color};color:#fff;font-size:14pt;font-weight:bold;margin-bottom:16px'>
-    Niveau ${niv.num} · ${niv.nom}
-  </div>
-  <p style='font-size:11pt;color:#666;font-style:italic;margin:8px 0 32px'>${niv.sousTitre}</p>
-  <p style='font-size:20pt;font-weight:bold;color:#1A1A1A;margin:0 0 4px'>${profil.icon} ${profil.titre}</p>
-  <p style='font-size:10pt;color:#888;margin:0'>${profil.signal}</p>
+<div style='background:${niv.color};height:1.2cm;width:100%'></div>
+<div class='body'>
+<div style='margin-bottom:2cm;padding-top:.5cm'>
+<p style='font-size:8pt;color:#AAA;letter-spacing:.12em;text-transform:uppercase;margin:0 0 5px'>Management Régénératif &nbsp;·&nbsp; Chapitre 10 &nbsp;·&nbsp; ${date}</p>
+<div style='width:44px;height:3px;background:${niv.color};margin:0 0 24px'></div>
+<p style='font-size:26pt;font-weight:bold;color:#1A3A28;margin:0;line-height:1.15;font-family:Georgia,serif'>Positionnement de</p>
+<p style='font-size:26pt;font-weight:bold;color:#1A3A28;margin:0 0 10px;line-height:1.15;font-family:Georgia,serif'>transparence managériale</p>
+<p style='font-size:10.5pt;color:#888;font-style:italic;margin:0 0 32px'>${niv.sousTitre}</p>
+</div>
+<div style='background:#F5F4F0;border-radius:6px;padding:24px 28px;margin-bottom:20px'>
+<p style='font-size:8pt;color:#AAA;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px'>Votre résultat</p>
+<p style='font-size:36pt;font-weight:bold;color:${niv.color};margin:0 0 3px;font-family:Georgia,serif;line-height:1'>${score} <span style='font-size:15pt;color:#AAA;font-weight:normal'>/ 150 pts &nbsp; ${globalPct}%</span></p>
+<p style='margin:0 0 12px'><span class='badge' style='background:${niv.color}'>Niveau ${niv.num} &nbsp;·&nbsp; ${niv.nom}</span></p>
+<div style='height:1px;background:#DDD;margin:12px 0'></div>
+<p style='font-size:13pt;font-weight:bold;color:#1A1A1A;margin:0 0 5px;font-family:Georgia,serif'>${profil.icon} ${profil.titre}</p>
+<p style='font-size:9.5pt;color:#666;font-style:italic;margin:0;line-height:1.55'>${profil.signal}</p>
+</div>
 </div>
 ${foot}</div>`;
 
-    // ── PAGE 2 : SCORE + PROFIL ──────────────────────────────
+    // PAGE 2 — SCORE + PROFIL
     h+=`<div class='page'>
-<h1>Résultat global et profil</h1>
-<table><tr>
-  <td style='width:35%;vertical-align:middle;text-align:center;border:none;padding:0 20px 0 0'>
-    <div style='font-size:52pt;font-weight:bold;color:${niv.color};line-height:1'>${score}</div>
-    <div style='font-size:11pt;color:#888'>/ 150 points</div>
-    <div style='font-size:14pt;color:#888'>${globalPct}%</div>
-    <div style='margin-top:12px;display:inline-block;padding:5px 14px;border-radius:20px;background:${niv.color};color:#fff;font-size:10pt;font-weight:bold'>
-      Niveau ${niv.num}
-    </div>
-  </td>
-  <td style='border:none;padding:0;vertical-align:top'>
-    <h2 style='margin-top:0'>${profil.icon} ${profil.titre}</h2>
-    <p>${profil.desc}</p>
-    <div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div>
-    <p class='m'>${niv.desc}</p>
-  </td>
-</tr></table>
-<div class='box' style='border-color:${niv.color};margin-top:16px'><strong>Action prioritaire :</strong> ${niv.action}</div>
+<div style='background:${niv.color};height:.4cm;width:100%'></div>
+<div class='body'>
+<h1>Résultat global et profil de manager</h1>
+<table>
+<tr>
+<td style='width:36%;border:none;vertical-align:middle;text-align:center;padding:0 24px 0 0;border-right:1px solid #EEE'>
+<p style='font-size:44pt;font-weight:bold;color:${niv.color};line-height:1;margin:0;font-family:Georgia,serif'>${score}</p>
+<p style='font-size:10pt;color:#AAA;margin:2px 0 8px'>/ 150 points &nbsp;·&nbsp; ${globalPct}%</p>
+<span class='badge' style='background:${niv.color}'>Niveau ${niv.num}</span>
+<p style='font-size:9.5pt;font-style:italic;color:#666;margin:8px 0 2px'>${niv.nom}</p>
+<p style='font-size:8.5pt;font-style:italic;color:#AAA;margin:0;line-height:1.4'>${niv.sousTitre}</p>
+</td>
+<td style='border:none;vertical-align:top;padding:0 0 0 24px'>
+<p style='font-size:13pt;font-weight:bold;color:#1A1A1A;margin:0 0 10px;font-family:Georgia,serif'>${profil.icon} ${profil.titre}</p>
+<p style='font-size:10pt;color:#444;margin:0 0 12px'>${profil.desc}</p>
+<div class='box' style='border-color:${niv.color};margin:0'>
+<p style='font-size:8pt;font-weight:bold;color:${niv.color};text-transform:uppercase;letter-spacing:.07em;margin:0 0 5px'>Signal caractéristique</p>
+<p style='font-size:10pt;font-style:italic;color:#333;margin:0'>${profil.signal}</p>
+</div>
+</td>
+</tr>
+</table>
+<div class='sep'></div>
+<div class='box' style='border-color:${niv.color}'>
+<p style='font-size:8pt;font-weight:bold;color:${niv.color};text-transform:uppercase;letter-spacing:.07em;margin:0 0 6px'>Action prioritaire cette semaine</p>
+<p style='margin:0'>${niv.action}</p>
+</div>
+<p style='font-size:10pt;color:#555;margin:12px 0 0'>${niv.desc}</p>
+</div>
 ${foot}</div>`;
 
-    // ── PAGE 3 : RADAR ───────────────────────────────────────
+    // PAGE 3 — RADAR
     h+=`<div class='page'>
+<div style='background:${niv.color};height:.4cm;width:100%'></div>
+<div class='body'>
 <h1>Radar de transparence managériale</h1>
-<p class='m'>Score global : <strong style='color:${niv.color}'>${globalPct}%</strong> · Niveau ${niv.num} · ${niv.nom}</p>
-<div style='text-align:center;margin:16px 0'>
-  <img src='${radarB64}' style='width:340px;height:340px;border-radius:8px' alt='Radar de transparence'/>
-</div>
-<table><tr><th>Dimension</th><th style='width:60px'>Score</th><th style='width:50px'>%</th><th style='width:110px'>Niveau</th></tr>`;
+<p class='m'>Score global : <strong style='color:${niv.color}'>${globalPct}%</strong> &nbsp;·&nbsp; Niveau ${niv.num} &nbsp;·&nbsp; ${niv.nom}</p>
+<table>
+<tr>
+<td style='border:none;width:52%;text-align:center;padding:0 16px 0 0;vertical-align:middle'>
+<img src='${radarB64}' style='width:250px;height:250px' alt='Radar'/>
+</td>
+<td style='border:none;vertical-align:top;padding:0'>
+<table style='margin:0'>
+<tr><th style='padding:5px 8px;font-size:9pt'>Dimension</th><th style='padding:5px 8px;font-size:9pt;width:52px;text-align:center'>Score</th><th style='padding:5px 8px;font-size:9pt;width:40px;text-align:center'>%</th><th style='padding:5px 8px;font-size:9pt;width:85px'>Niveau</th></tr>`;
     DIMENSIONS.forEach(d=>{
       const s=getDimScore(rep,d.id),max=getDimMax(d.id),pct=Math.round(s/max*100),nv2=getDimNiv(s/max);
       h+=`<tr>
-        <td><strong style='color:${d.color}'>${d.label}</strong></td>
-        <td style='text-align:center;font-weight:bold;color:${d.color}'>${s}/${max}</td>
-        <td style='text-align:center;font-weight:bold;color:${nv2.color}'>${pct}%</td>
-        <td style='color:${nv2.color};font-weight:bold'>${nv2.label}</td>
-      </tr>`;
+<td style='padding:5px 8px;font-weight:600;color:${d.color};font-size:9.5pt'>${d.label}</td>
+<td style='text-align:center;font-weight:bold;color:${d.color};padding:5px 8px;font-size:9.5pt'>${s}/${max}</td>
+<td style='text-align:center;font-weight:bold;color:${nv2.color};padding:5px 8px;font-size:9.5pt'>${pct}%</td>
+<td style='color:${nv2.color};font-weight:bold;padding:5px 8px;font-size:9pt'>${nv2.label}</td>
+</tr>`;
     });
-    h+=`</table>${foot}</div>`;
+    h+=`</table></td></tr></table>
+</div>${foot}</div>`;
 
-    // ── PAGE 4 : DIRECTIVE ───────────────────────────────────
+    // PAGE 4 — DIRECTIVE
     h+=`<div class='page'>
-<h1>Directive (UE) 2023/970 · Votre situation</h1>
+<div style='background:#2A6090;height:.4cm;width:100%'></div>
+<div class='body'>
+<h1>Directive (UE) 2023/970 &nbsp;·&nbsp; Votre situation</h1>
 <h2>${directive.titre}</h2>
 <p>${directive.texte}</p>
-<div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div>
-<h2 style='margin-top:24px'>Ce que la directive impose</h2>
+<div class='box' style='border-color:#2A6090;background:#EEF4FB'>
+<p style='font-size:8pt;font-weight:bold;color:#2A6090;text-transform:uppercase;letter-spacing:.07em;margin:0 0 6px'>Priorité réglementaire</p>
+<p style='margin:0'>${directive.urgence}</p>
+</div>
+<div class='sep'></div>
+<h2>Tableau de conformité &nbsp;·&nbsp; Échéance juin 2026</h2>
 <table>
-  <tr><th>Obligation</th><th style='width:110px'>Seuil requis</th><th style='width:60px'>Statut</th></tr>`;
-    [
-      {ob:"Afficher une fourchette salariale dans les offres d'emploi",niv2:3,label:"Niveau 3"},
-      {ob:"Interdire de demander l'historique salarial des candidats",niv2:1,label:"Niveau 1"},
-      {ob:"Permettre l'accès aux niveaux moyens de rémunération par sexe",niv2:3,label:"Niveau 3"},
-      {ob:"Justifier les écarts de rémunération supérieurs à 5%",niv2:3,label:"Niveau 3"},
-      {ob:"Publier des rapports d'écarts F/H (entreprises 100+)",niv2:3,label:"Niveau 3"},
-      {ob:"Répondre sous 2 mois aux demandes d'information salariale",niv2:2,label:"Niveau 2"},
-    ].forEach(item=>{
+<tr><th style='width:72%'>Obligation imposée</th><th style='width:14%;text-align:center'>Seuil</th><th style='width:14%;text-align:center'>Statut</th></tr>`;
+    [{ob:"Afficher une fourchette salariale dans les offres d'emploi",niv2:3,label:"Niv. 3"},
+     {ob:"Interdire de demander l'historique salarial des candidats",niv2:1,label:"Niv. 1"},
+     {ob:"Accès aux niveaux moyens de rémunération par sexe",niv2:3,label:"Niv. 3"},
+     {ob:"Justifier les écarts de rémunération supérieurs à 5%",niv2:3,label:"Niv. 3"},
+     {ob:"Rapports d'écarts F/H (entreprises de 100+)",niv2:3,label:"Niv. 3"},
+     {ob:"Répondre sous 2 mois aux demandes d'information",niv2:2,label:"Niv. 2"}].forEach(item=>{
       const done=niv.num>=item.niv2;
-      h+=`<tr><td style='font-size:9.5pt'>${item.ob}</td><td style='font-size:9pt;color:#666'>${item.label}</td><td style='text-align:center;color:${done?"#3A7A40":"#C0392B"};font-weight:bold'>${done?"✓":"·"}</td></tr>`;
+      h+=`<tr><td style='font-size:9.5pt'>${item.ob}</td><td style='text-align:center;font-size:9pt;color:#666'>${item.label}</td><td style='text-align:center;font-size:12pt;color:${done?"#3A7A40":"#C0392B"}'>${done?"✓":"○"}</td></tr>`;
     });
-    h+=`</table>${foot}</div>`;
+    h+=`</table></div>${foot}</div>`;
 
-    // ── PAGE 5 : PRÉCONISATIONS ──────────────────────────────
+    // PAGE 5 — PRÉCONISATIONS
     h+=`<div class='page'>
+<div style='background:${niv.color};height:.4cm;width:100%'></div>
+<div class='body'>
 <h1>Vos 3 préconisations prioritaires</h1>
-<div class='box' style='border-color:${niv.color};margin-bottom:18px'>${niv.conseil}</div>`;
+<div class='box' style='border-color:${niv.color};margin-bottom:18px'>
+<p style='font-size:8pt;font-weight:bold;color:${niv.color};text-transform:uppercase;letter-spacing:.07em;margin:0 0 5px'>Conseil stratégique &nbsp;·&nbsp; Niveau ${niv.num}</p>
+<p style='margin:0'>${niv.conseil}</p>
+</div>`;
     recos.forEach((r,i)=>{
-      h+=`<h2 style='color:${r.c}'>${i+1}. ${r.t}</h2>`;
-      r.etapes.forEach((e,j)=>{h+=`<div class='et'><strong>Étape ${j+1} :</strong> ${e}</div>`;});
+      h+=`<div style='margin-bottom:16px'>
+<h2 style='color:${r.c};margin-top:0'>${i+1}. ${r.t}</h2>`;
+      r.etapes.forEach((e,j)=>{
+        h+=`<div style='display:flex;gap:9px;padding:5px 0;border-bottom:1px solid #EEE'>
+<div style='min-width:19px;height:19px;border-radius:50%;background:${r.c};color:#fff;font-size:7.5pt;font-weight:bold;text-align:center;line-height:19px;flex-shrink:0'>${j+1}</div>
+<p style='margin:0;font-size:10pt;color:#333'>${e}</p>
+</div>`;
+      });
+      h+=`</div>`;
     });
-    h+=`${foot}</div>`;
+    h+=`</div>${foot}</div>`;
 
-    // ── PAGE 6 : DÉTAIL ──────────────────────────────────────
+    // PAGE 6 — DÉTAIL
     h+=`<div class='page'>
-<h1>Détail de vos réponses</h1>`;
+<div style='background:#555;height:.4cm;width:100%'></div>
+<div class='body'>
+<h1>Détail de vos réponses par dimension</h1>`;
     DIMENSIONS.forEach(d=>{
       const dq=QUESTIONS.filter(q=>q.dim===d.id);
-      h+=`<h2 style='color:${d.color}'>${d.label}</h2><table>
-<tr><th style='width:78%'>Question</th><th style='width:12%'>Note</th><th style='width:10%'>Label</th></tr>`;
+      h+=`<h2 style='color:${d.color};margin-top:16px'>${d.label}</h2>
+<table style='margin-bottom:14px'>
+<tr><th style='width:78%'>Question</th><th style='width:11%;text-align:center'>Note</th><th style='width:11%;text-align:center'>Réponse</th></tr>`;
       dq.forEach(q=>{
         const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);
-        h+=`<tr><td style='font-size:9pt'>${q.texte}</td>
-<td style='text-align:center;font-weight:bold;color:${e?e.bg:"#aaa"}'>${v}/5</td>
-<td style='font-size:8.5pt;color:${e?e.bg:"#aaa"}'>${e?e.label:"·"}</td></tr>`;
+        h+=`<tr><td style='font-size:9pt'>${q.texte}</td><td style='text-align:center;font-weight:bold;color:${e?e.bg:"#AAA"};font-size:10pt'>${v}/5</td><td style='text-align:center;font-size:8.5pt;color:${e?e.bg:"#AAA"}'>${e?e.label:"·"}</td></tr>`;
       });
       h+=`</table>`;
     });
-    h+=`${foot}</div>`;
-
-    h+=`</body></html>`;
+    h+=`</div>${foot}</div></body></html>`;
 
     const blob=new Blob([h],{type:"application/msword;charset=utf-8"});
     const url=URL.createObjectURL(blob);
