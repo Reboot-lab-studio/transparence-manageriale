@@ -532,27 +532,27 @@ const NIVEAUX = [
   { num:0, nom:"Opacité",               sousTitre:"L'équipe exécute sans comprendre : ni les objectifs, ni les contraintes, ni les décisions",        color:"#E05252", bg:"rgba(224,82,82,.1)",   range:[6,30],
     desc:"La transparence est quasi absente. L'information est retenue par réflexe ou conviction hiérarchique. Ce modèle génère méfiance, rumeurs et désengagement progressif.",
     conseil:"Commencez par partager les contraintes et le « pourquoi » de vos décisions lors de votre prochaine réunion d'équipe. Un seul geste change la dynamique.",
-    action:"Cette semaine : expliquez une décision récente en détaillant les 3 critères qui vous ont guidé." },
+    action:"expliquez une décision récente en détaillant les 3 critères qui vous ont guidé." },
   { num:1, nom:"Minimale",              sousTitre:"Le manager partage l'indispensable, mais filtre tout ce qui sort de la tâche immédiate",  color:"#E07040", bg:"rgba(224,112,64,.1)",  range:[31,54],
     desc:"Vous partagez l'essentiel mais restez sur vos gardes. Votre équipe sait ce qu'elle doit faire sans toujours comprendre pourquoi. Le manque d'accès aux indicateurs limite son autonomie.",
     conseil:"Ouvrez progressivement l'accès aux indicateurs de performance. Partagez les résultats en temps réel plutôt qu'en fin de période.",
-    action:"Cette semaine : créez ou partagez un tableau de bord d'équipe accessible à tous." },
+    action:"créez ou partagez un tableau de bord d'équipe accessible à tous." },
   { num:2, nom:"Des critères",          sousTitre:"Le manager explique sa logique et ses critères de décision, sans ouvrir les données collectives", color:"#C89030", bg:"rgba(200,144,48,.1)",  range:[55,78],
     desc:"Vous expliquez votre logique et vos critères. Votre équipe comprend la philosophie sans voir tous les chiffres. Niveau solide. La prochaine marche : la dimension stratégique.",
     conseil:"Renforcez la transparence tactique · partagez les retours clients et les analyses · puis progressez vers les enjeux stratégiques qui donnent du sens au quotidien.",
-    action:"Cette semaine : partagez un retour client ou une analyse concurrentielle en réunion d'équipe." },
+    action:"partagez un retour client ou une analyse concurrentielle en réunion d'équipe." },
   { num:3, nom:"Critères et indicateurs", sousTitre:"L'équipe accède aux indicateurs, aux retours clients et comprend une partie des enjeux stratégiques", color:"#5AAA60", bg:"rgba(90,170,96,.1)",   range:[79,102],
     desc:"Vous pratiquez une transparence substantielle. Votre équipe prend des décisions plus autonomes. C'est le niveau attendu par la directive (UE) 2023/970 pour juin 2026.",
     conseil:"Consolidez la transparence relationnelle · feedback régulier, reconnaissance des erreurs, cohérence public/privé · pour ancrer la confiance qui rend la coresponsabilité durable.",
-    action:"Cette semaine : instaurez un rituel de feedback hebdomadaire de 15 minutes." },
+    action:"instaurez un rituel de feedback hebdomadaire de 15 minutes." },
   { num:4, nom:"Interne totale",        sousTitre:"Objectifs, contraintes, résultats, tensions et choix stratégiques sont partagés sans filtre en interne", color:"#4A90D0", bg:"rgba(74,144,208,.1)",  range:[103,126],
     desc:"Vous pratiquez une transparence avancée sur les cinq dimensions. Vos collaborateurs comprennent les enjeux en profondeur. Ce niveau crée une coresponsabilité authentique.",
     conseil:"Maintenez cette transparence sous pression · budget serré, décisions difficiles, réorganisations. C'est là qu'elle se prouve ou s'effrite.",
-    action:"Cette semaine : testez votre transparence sous pression en partageant une contrainte difficile." },
+    action:"testez votre transparence sous pression en partageant une contrainte difficile." },
   { num:5, nom:"Radicale",              sousTitre:"La transparence est une culture : l'équipe co-construit les décisions avec la même information que le manager", color:"#8A70E0", bg:"rgba(138,112,224,.1)", range:[127,150],
     desc:"Vous incarnez la transparence managériale dans toutes ses dimensions avec une cohérence remarquable. Votre équipe fonctionne en partenaire de confiance.",
     conseil:"Votre rôle : essaimer. Partagez vos pratiques, accompagnez d'autres managers, devenez un référent de la culture de transparence dans votre organisation.",
-    action:"Cette semaine : documentez une pratique de transparence qui fonctionne et partagez-la avec un collègue." },
+    action:"documentez une pratique de transparence qui fonctionne et partagez-la avec un collègue." },
 ];
 
 const RECOS = {
@@ -624,45 +624,124 @@ function generateWord(rep) {
   const directive=DIRECTIVE_INFO[niv.num]||DIRECTIVE_INFO[0];
   const recos=RECOS[niv.num]||RECOS[0];
   const date=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
-  let h=`<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><style>@page{size:A4;margin:2cm}body{font-family:Georgia,serif;font-size:11pt;color:#1A1A1A;line-height:1.7}h1{font-size:15pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:5px;margin-top:28px}h2{font-size:12pt;color:#2A3A2A;margin-top:16px;margin-bottom:6px}h3{font-size:11pt;color:#2A3A2A;margin-top:12px}table{border-collapse:collapse;width:100%;margin:10px 0}th{background:#1A3A28;color:#fff;padding:7px 10px;text-align:left;font-size:10pt}td{border:1px solid #ddd;padding:6px 10px;font-size:10pt}.box{padding:11px 15px;margin:10px 0;border-left:4px solid;background:#F9F7F3}.pb{page-break-before:always}.m{color:#666;font-style:italic}.et{padding:4px 0 4px 14px;font-size:10pt;color:#333;border-bottom:1px solid #eee}</style></head><body>`;
-  // COUVERTURE
-  h+=`<div style='text-align:center;margin-bottom:36px'><p style='font-size:18pt;font-weight:bold;color:#1A3A28'>POSITIONNEMENT DE TRANSPARENCE MANAGÉRIALE</p><p style='font-size:11pt;font-style:italic;color:#666;margin:6px 0'>Diagnostic personnel · Chapitre 10 · Management Régénératif</p><p style='font-size:10pt;color:#aaa'>${date}</p></div>`;
-  // SCORE
-  h+=`<h1>Résultat global</h1><p><span style='font-size:26pt;font-weight:bold;color:${niv.color}'>${score}</span><span style='color:#aaa;font-size:12pt'> / 150 points</span></p><p style='margin:8px 0'><span style='display:inline-block;padding:4px 16px;border-radius:10px;color:#fff;font-weight:bold;background:${niv.color}'>Niveau ${niv.num} · ${niv.nom}</span></p><p style='color:#666;font-style:italic;margin:4px 0 10px'>${niv.sousTitre}</p><h2>${profil.icon} Profil de transparence managériale : ${profil.titre}</h2><div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div><p class='m' style='margin:12px 0'>${niv.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Action cette semaine :</strong> ${niv.action}</div>`;
-  // RADAR (représentation Word : tableau radial stylisé)
-  const radarRows = DIMENSIONS.map(d=>{
+
+  // ── Radar SVG en couleur pour Word ─────────────────────────
+  const cx=200,cy=200,R=140,sides=5;
+  const ang=(i)=>(Math.PI*2*i/sides)-Math.PI/2;
+  const pt=(i,r)=>({x:cx+R*r*Math.cos(ang(i)),y:cy+R*r*Math.sin(ang(i))});
+  const gridPoly=(r)=>DIMENSIONS.map((_,i)=>{const p=pt(i,r);return `${p.x},${p.y}`;}).join(" ");
+  const scores=DIMENSIONS.map(d=>getDimScore(rep,d.id)/getDimMax(d.id));
+  const scorePoly=DIMENSIONS.map((_,i)=>{const p=pt(i,scores[i]);return `${p.x},${p.y}`;}).join(" ");
+  const labelOff=28;
+  const lp=(i)=>{const a=ang(i);return{x:cx+(R+labelOff)*Math.cos(a),y:cy+(R+labelOff)*Math.sin(a)};};
+  const globalPct=Math.round(score/150*100);
+
+  let radarSVG=`<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 400 400' style='display:block;margin:0 auto'>`;
+  radarSVG+=`<rect width='400' height='400' fill='#F8F8F5' rx='8'/>`;
+  [.2,.4,.6,.8,1].forEach((r,li)=>{
+    radarSVG+=`<polygon points='${gridPoly(r)}' fill='none' stroke='${li===4?"#AAAAAA":"#DDDDDD"}' stroke-width='${li===4?1:.5}'/>`;
+  });
+  DIMENSIONS.forEach((_,i)=>{const p=pt(i,1);radarSVG+=`<line x1='${cx}' y1='${cy}' x2='${p.x}' y2='${p.y}' stroke='#DDDDDD' stroke-width='.5'/>`;});
+  radarSVG+=`<polygon points='${scorePoly}' fill='${niv.color}33' stroke='${niv.color}' stroke-width='2' stroke-linejoin='round'/>`;
+  DIMENSIONS.forEach((d,i)=>{const p=pt(i,scores[i]);radarSVG+=`<circle cx='${p.x}' cy='${p.y}' r='5' fill='${d.color}' stroke='#fff' stroke-width='1.5'/>`;});
+  radarSVG+=`<circle cx='${cx}' cy='${cy}' r='18' fill='${niv.color}33' stroke='${niv.color}' stroke-width='1'/>`;
+  radarSVG+=`<text x='${cx}' y='${cy+1}' text-anchor='middle' dominant-baseline='central' style='font-size:11px;font-weight:bold;fill:${niv.color}'>${globalPct}%</text>`;
+  DIMENSIONS.forEach((d,i)=>{
+    const l=lp(i);
     const s=getDimScore(rep,d.id),max=getDimMax(d.id);
-    const pct=Math.round(s/max*100);
-    const bars=Math.round(pct/10);
-    const bar='█'.repeat(bars)+'░'.repeat(10-bars);
-    const nv=getDimNiv(s/max);
-    return `<tr><td style='font-size:10pt'>${d.icon} ${d.label}</td><td style='font-family:monospace;font-size:9pt;color:${d.color};letter-spacing:1px'>${bar}</td><td style='text-align:center;font-weight:bold;color:${nv.color};font-size:10pt'>${pct}%</td><td style='color:${nv.color};font-size:9pt'>${nv.label}</td></tr>`;
-  }).join('');
-  h+=`<div class='pb'></div><h1>Radar de transparence</h1><p class='m'>Vue synthétique de vos 5 dimensions · Score global : <strong style='color:${niv.color}'>${Math.round(score/150*100)}%</strong> · Niveau ${niv.num} · ${niv.nom}</p><table style='margin-top:12px'><tr><th>Dimension</th><th>Niveau visuel</th><th>%</th><th>Qualification</th></tr>${radarRows}</table><div class='box' style='border-color:${niv.color};margin-top:14px'><strong>Score global :</strong> ${score} / 150 points · Niveau ${niv.num} · ${niv.nom}<br>${niv.desc}</div>`;
-  h+=`<div class='pb'></div><h1>Votre profil de manager</h1><h2>${profil.icon} ${profil.titre}</h2><p>${profil.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div>`;
-  // DIRECTIVE
-  h+=`<div class='pb'></div><h1>La directive (UE) 2023/970 et votre situation</h1><h2>${directive.titre}</h2><p>${directive.texte}</p><div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div>`;
-  // SCORES PAR DIMENSION
-  h+=`<h1>Scores par dimension</h1><table><tr><th>Dimension</th><th>Score</th><th>Niveau</th></tr>`;
-  DIMENSIONS.forEach(d=>{const s=getDimScore(rep,d.id),max=getDimMax(d.id),nv=getDimNiv(s/max);h+=`<tr><td><strong>${d.icon} ${d.label}</strong><br><span style='font-size:9pt;color:#666'>${d.chapRef}</span></td><td style='text-align:center;font-weight:bold;color:${nv.color}'>${s}/${max}</td><td style='color:${nv.color};font-weight:bold'>${nv.label}</td></tr>`;});
-  h+=`</table>`;
-  // PRÉCONISATIONS
-  h+=`<div class='pb'></div><h1>Vos 3 préconisations prioritaires</h1><div class='box' style='border-color:${niv.color}'>${niv.conseil}</div>`;
+    const a=ang(i)*180/Math.PI;
+    const anchor=Math.abs(a+90)<20||Math.abs(a-90)<20||Math.abs(a+270)<20?"middle":l.x>cx?"start":"end";
+    radarSVG+=`<text x='${l.x}' y='${l.y-5}' text-anchor='${anchor}' style='font-size:10px;font-weight:600;fill:${d.color}'>${d.label}</text>`;
+    radarSVG+=`<text x='${l.x}' y='${l.y+8}' text-anchor='${anchor}' style='font-size:9px;fill:#888'>${s}/${max}</text>`;
+  });
+  radarSVG+=`</svg>`;
+
+  // ── Styles Word ──────────────────────────────────────────────
+  const css=`@page{size:A4;margin:2cm 2cm 2.5cm;mso-footer-margin:1.2cm}
+  @page{@bottom-center{content:'Diagnostic de transparence · Management Régénératif · Benjamin Chaminade';font-size:9pt;color:#888}}
+  body{font-family:Georgia,serif;font-size:11pt;color:#1A1A1A;line-height:1.7}
+  h1{font-size:15pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:5px;margin-top:0;page-break-before:always}
+  h1.first{page-break-before:avoid}
+  h2{font-size:12pt;color:#2A3A2A;margin-top:16px;margin-bottom:6px}
+  h3{font-size:11pt;color:#2A3A2A;margin-top:12px}
+  table{border-collapse:collapse;width:100%;margin:10px 0;page-break-inside:avoid}
+  th{background:#1A3A28;color:#fff;padding:7px 10px;text-align:left;font-size:10pt}
+  td{border:1px solid #ddd;padding:6px 10px;font-size:10pt}
+  .box{padding:11px 15px;margin:10px 0;border-left:4px solid;background:#F9F7F3;page-break-inside:avoid}
+  .sec{page-break-before:always;padding-top:4px}
+  .m{color:#666;font-style:italic}
+  .et{padding:4px 0 4px 14px;font-size:10pt;color:#333;border-bottom:1px solid #eee}
+  .foot-txt{text-align:center;font-size:9pt;color:#888;margin-top:40px;padding-top:12px;border-top:1px solid #ddd}`;
+
+  let h=`<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><style>${css}</style></head><body>`;
+
+  // PAGE 1 — COUVERTURE + SCORE
+  h+=`<div style='text-align:center;margin-bottom:28px;padding-top:60px'>
+    <p style='font-size:18pt;font-weight:bold;color:#1A3A28;margin:0'>POSITIONNEMENT DE TRANSPARENCE MANAGÉRIALE</p>
+    <p style='font-size:11pt;font-style:italic;color:#666;margin:8px 0'>Diagnostic personnel · Chapitre 10 · Management Régénératif</p>
+    <p style='font-size:10pt;color:#aaa'>${date}</p>
+  </div>
+  <h1 class='first'>Résultat global</h1>
+  <p><span style='font-size:26pt;font-weight:bold;color:${niv.color}'>${score}</span><span style='color:#aaa;font-size:12pt'> / 150 points · ${globalPct}%</span></p>
+  <p style='margin:8px 0'><span style='display:inline-block;padding:4px 16px;border-radius:10px;color:#fff;font-weight:bold;background:${niv.color}'>Niveau ${niv.num} · ${niv.nom}</span></p>
+  <p class='m' style='margin:4px 0 10px'>${niv.sousTitre}</p>
+  <h2>${profil.icon} ${profil.titre}</h2>
+  <div class='box' style='border-color:${niv.color}'>${profil.signal}</div>
+  <p class='m'>${niv.desc}</p>
+  <div class='box' style='border-color:${niv.color}'><strong>Action :</strong> ${niv.action}</div>`;
+
+  // PAGE 2 — RADAR
+  h+=`<div class='sec'><h1>Radar de transparence</h1>
+  <p class='m'>Score global : <strong style='color:${niv.color}'>${globalPct}%</strong> · Niveau ${niv.num} · ${niv.nom}</p>
+  <div style='text-align:center;margin:20px 0'>${radarSVG}</div>
+  <table style='margin-top:16px'><tr><th>Dimension</th><th>Score</th><th>%</th><th>Niveau</th></tr>`;
+  DIMENSIONS.forEach(d=>{const s=getDimScore(rep,d.id),max=getDimMax(d.id),pct=Math.round(s/max*100),nv=getDimNiv(s/max);
+    h+=`<tr><td style='color:${d.color};font-weight:600'>${d.icon} ${d.label}</td><td style='text-align:center;font-weight:bold;color:${d.color}'>${s}/${max}</td><td style='text-align:center;font-weight:bold;color:${nv.color}'>${pct}%</td><td style='color:${nv.color};font-weight:bold'>${nv.label}</td></tr>`;});
+  h+=`</table></div>`;
+
+  // PAGE 3 — PROFIL DE MANAGER
+  h+=`<div class='sec'><h1>Votre profil de manager</h1>
+  <h2>${profil.icon} ${profil.titre}</h2>
+  <p>${profil.desc}</p>
+  <div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div></div>`;
+
+  // PAGE 4 — DIRECTIVE
+  h+=`<div class='sec'><h1>La directive (UE) 2023/970 et votre situation</h1>
+  <h2>${directive.titre}</h2>
+  <p>${directive.texte}</p>
+  <div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div></div>`;
+
+  // PAGE 5 — SCORES PAR DIMENSION
+  h+=`<div class='sec'><h1>Scores par dimension</h1>
+  <table><tr><th>Dimension</th><th>Score</th><th>Niveau</th></tr>`;
+  DIMENSIONS.forEach(d=>{const s=getDimScore(rep,d.id),max=getDimMax(d.id),nv=getDimNiv(s/max);
+    h+=`<tr><td><strong style='color:${d.color}'>${d.icon} ${d.label}</strong><br><span style='font-size:9pt;color:#666'>${d.chapRef}</span></td><td style='text-align:center;font-weight:bold;color:${nv.color}'>${s}/${max}</td><td style='color:${nv.color};font-weight:bold'>${nv.label}</td></tr>`;});
+  h+=`</table></div>`;
+
+  // PAGE 6 — PRÉCONISATIONS
+  h+=`<div class='sec'><h1>Vos 3 préconisations prioritaires</h1>
+  <div class='box' style='border-color:${niv.color}'>${niv.conseil}</div>`;
   recos.forEach((r,i)=>{
-    h+=`<h2>${i+1}. ${r.t}</h2>`;
+    h+=`<h2 style='color:${r.c}'>${i+1}. ${r.t}</h2>`;
     r.etapes.forEach((e,j)=>{h+=`<div class='et'><strong>Étape ${j+1} :</strong> ${e}</div>`;});
   });
-  // CONTACT
-  h+=`<div class='pb'></div><h1>Aller plus loin avec Benjamin Chaminade</h1><p>Benjamin Chaminade accompagne les managers et les organisations dans leur transformation régénérative. Diagnostic approfondi, accompagnement sur-mesure, conférences et ateliers sur le management régénératif.</p><div class='box' style='border-color:#3A6B4A;background:#F0F8F2'><strong>Contact :</strong> <a href='https://benjaminchaminade.com/contact/'>benjaminchaminade.com/contact</a></div>`;
-  // DÉTAIL QUESTIONS
-  h+=`<div class='pb'></div><h1>Détail de vos réponses par dimension</h1>`;
+  h+=`</div>`;
+
+  // PAGE 7 — DÉTAIL
+  h+=`<div class='sec'><h1>Détail de vos réponses par dimension</h1>`;
   DIMENSIONS.forEach(d=>{
     const dq=QUESTIONS.filter(q=>q.dim===d.id);
-    h+=`<h2>${d.icon} ${d.label}</h2><p class='m'>${d.desc}</p><table><tr><th>Question</th><th style='width:90px'>Réponse</th></tr>`;
-    dq.forEach(q=>{const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);h+=`<tr><td style='font-size:9.5pt'>${q.texte}</td><td style='text-align:center;color:${e?e.bg:"#aaa"};font-weight:bold'>${v}/5<br><span style='font-size:8pt'>${e?e.label:"N/A"}</span></td></tr>`;});
+    h+=`<h2 style='color:${d.color}'>${d.icon} ${d.label}</h2><table><tr><th>Question</th><th style='width:90px'>Réponse</th></tr>`;
+    dq.forEach(q=>{const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);
+      h+=`<tr><td style='font-size:9.5pt'>${q.texte}</td><td style='text-align:center;color:${e?e.bg:"#aaa"};font-weight:bold'>${v}/5<br><span style='font-size:8pt'>${e?e.label:"N/A"}</span></td></tr>`;});
     h+=`</table>`;
   });
-  h+=`<p class='m' style='margin-top:28px'>Management Régénératif · Benjamin Chaminade · questionnaire-transparence.html</p></body></html>`;
+  h+=`</div>`;
+
+  // PIED DE PAGE
+  h+=`<div class='foot-txt'>Diagnostic de transparence · Management Régénératif · Benjamin Chaminade</div>`;
+  h+=`</body></html>`;
+
   const blob=new Blob([h],{type:"application/msword"});
   const url=URL.createObjectURL(blob);
   const a=document.createElement("a");a.href=url;
@@ -1032,23 +1111,17 @@ function App() {
       <div className="result-hero" style={{borderColor:`${niv.color}30`}}>
         <div className="result-hero-bg" style={{color:niv.color}}>{niv.num}</div>
         <div className="result-niv-tag" style={{background:niv.bg,color:niv.color,border:`1px solid ${niv.color}40`}}>
-          Niveau {niv.num}
+          Niveau {niv.num} · {niv.nom}
         </div>
-        <div className="result-niv-name" style={{color:niv.color}}>{niv.nom}</div>
-        <div style={{fontSize:".78rem",color:"var(--muted)",marginBottom:6,fontStyle:"italic"}}>{niv.sousTitre}</div>
+        <div className="result-niv-name" style={{color:niv.color,fontSize:"clamp(1.6rem,5vw,2.8rem)"}}>{profil.icon} {profil.titre}</div>
+        <div style={{fontSize:".82rem",color:"var(--muted)",marginBottom:8,fontStyle:"italic"}}>{niv.sousTitre}</div>
         <div className="result-score">{score} points / 150</div>
         <div className="result-scorebar">
           <div className="result-scorefill" style={{width:Math.round((score/150)*100)+"%",background:niv.color}} />
         </div>
 
-        {/* ── TITRE DU PROFIL SOUS LE SCORE ── */}
-        <div style={{marginTop:16,marginBottom:4,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
-          <span style={{fontSize:"1.3rem",lineHeight:1}}>{profil.icon}</span>
-          <span style={{fontFamily:"'Playfair Display',serif",fontSize:"1.15rem",fontWeight:700,color:"var(--text)",letterSpacing:"-.01em"}}>
-            {profil.titre}
-          </span>
-        </div>
-        <div style={{fontSize:".78rem",color:"var(--muted)",marginBottom:18,fontStyle:"italic",maxWidth:480}}>
+        {/* Signal caractéristique centré sous le score */}
+        <div style={{fontSize:".84rem",color:"var(--muted)",margin:"16px auto 18px",fontStyle:"italic",maxWidth:500,textAlign:"center",lineHeight:1.65}}>
           {profil.signal}
         </div>
 
