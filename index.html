@@ -618,135 +618,223 @@ function getDimNiv(pct) {
 }
 function getDone(rep) { return QUESTIONS.filter(q=>rep[q.id]).length; }
 
+function buildRadarPNG(rep, niv, cb) {
+  const W=480, H=480, cx=240, cy=240, R=160;
+  const canvas = document.createElement('canvas');
+  canvas.width=W; canvas.height=H;
+  const g = canvas.getContext('2d');
+
+  // Fond blanc
+  g.fillStyle='#F9F9F6'; g.fillRect(0,0,W,H);
+
+  const ang=(i)=>(Math.PI*2*i/5)-Math.PI/2;
+  const pt=(i,r)=>({x:cx+R*r*Math.cos(ang(i)),y:cy+R*r*Math.sin(ang(i))});
+
+  // Grille
+  [.2,.4,.6,.8,1].forEach((r,li)=>{
+    g.beginPath();
+    DIMENSIONS.forEach((_,i)=>{const p=pt(i,r);i===0?g.moveTo(p.x,p.y):g.lineTo(p.x,p.y);});
+    g.closePath();
+    g.strokeStyle=li===4?'#AAAAAA':'#DDDDDD';
+    g.lineWidth=li===4?1:.5;
+    g.stroke();
+  });
+
+  // Axes
+  DIMENSIONS.forEach((_,i)=>{
+    const p=pt(i,1);
+    g.beginPath();g.moveTo(cx,cy);g.lineTo(p.x,p.y);
+    g.strokeStyle='#CCCCCC';g.lineWidth=.5;g.stroke();
+  });
+
+  // Zone score
+  const scores=DIMENSIONS.map(d=>getDimScore(rep,d.id)/getDimMax(d.id));
+  g.beginPath();
+  DIMENSIONS.forEach((_,i)=>{const p=pt(i,scores[i]);i===0?g.moveTo(p.x,p.y):g.lineTo(p.x,p.y);});
+  g.closePath();
+  g.fillStyle=niv.color+'40'; g.fill();
+  g.strokeStyle=niv.color; g.lineWidth=2.5; g.stroke();
+
+  // Points colorés sur les axes
+  DIMENSIONS.forEach((d,i)=>{
+    const p=pt(i,scores[i]);
+    g.beginPath();g.arc(p.x,p.y,6,0,Math.PI*2);
+    g.fillStyle=d.color; g.fill();
+    g.strokeStyle='#fff'; g.lineWidth=2; g.stroke();
+  });
+
+  // Centre
+  const globalPct=Math.round(getTotalScore(rep)/150*100);
+  g.beginPath();g.arc(cx,cy,22,0,Math.PI*2);
+  g.fillStyle=niv.color+'44'; g.fill();
+  g.strokeStyle=niv.color; g.lineWidth=1.5; g.stroke();
+  g.fillStyle=niv.color; g.font='bold 13px Georgia';
+  g.textAlign='center'; g.textBaseline='middle';
+  g.fillText(globalPct+'%',cx,cy);
+
+  // Labels avec scores
+  const labelR=R+36;
+  DIMENSIONS.forEach((d,i)=>{
+    const lx=cx+labelR*Math.cos(ang(i));
+    const ly=cy+labelR*Math.sin(ang(i));
+    const s=getDimScore(rep,d.id),max=getDimMax(d.id);
+    const a=ang(i)*180/Math.PI;
+    g.textAlign=Math.abs(a+90)<25||Math.abs(a-90)<25||Math.abs(a+270)<25?'center':lx>cx?'left':'right';
+    g.textBaseline='middle';
+    g.fillStyle=d.color; g.font='bold 12px sans-serif';
+    g.fillText(d.label, lx, ly-7);
+    g.fillStyle='#888'; g.font='11px sans-serif';
+    g.fillText(s+'/'+max, lx, ly+8);
+  });
+
+  cb(canvas.toDataURL('image/png'));
+}
+
 function generateWord(rep) {
   const score=getTotalScore(rep),niv=getNiveau(score);
   const profil=PROFILS_MANAGER[niv.num]||PROFILS_MANAGER[0];
   const directive=DIRECTIVE_INFO[niv.num]||DIRECTIVE_INFO[0];
   const recos=RECOS[niv.num]||RECOS[0];
   const date=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
-
-  // ── Radar SVG en couleur pour Word ─────────────────────────
-  const cx=200,cy=200,R=140,sides=5;
-  const ang=(i)=>(Math.PI*2*i/sides)-Math.PI/2;
-  const pt=(i,r)=>({x:cx+R*r*Math.cos(ang(i)),y:cy+R*r*Math.sin(ang(i))});
-  const gridPoly=(r)=>DIMENSIONS.map((_,i)=>{const p=pt(i,r);return `${p.x},${p.y}`;}).join(" ");
-  const scores=DIMENSIONS.map(d=>getDimScore(rep,d.id)/getDimMax(d.id));
-  const scorePoly=DIMENSIONS.map((_,i)=>{const p=pt(i,scores[i]);return `${p.x},${p.y}`;}).join(" ");
-  const labelOff=28;
-  const lp=(i)=>{const a=ang(i);return{x:cx+(R+labelOff)*Math.cos(a),y:cy+(R+labelOff)*Math.sin(a)};};
   const globalPct=Math.round(score/150*100);
 
-  let radarSVG=`<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 400 400' style='display:block;margin:0 auto'>`;
-  radarSVG+=`<rect width='400' height='400' fill='#F8F8F5' rx='8'/>`;
-  [.2,.4,.6,.8,1].forEach((r,li)=>{
-    radarSVG+=`<polygon points='${gridPoly(r)}' fill='none' stroke='${li===4?"#AAAAAA":"#DDDDDD"}' stroke-width='${li===4?1:.5}'/>`;
-  });
-  DIMENSIONS.forEach((_,i)=>{const p=pt(i,1);radarSVG+=`<line x1='${cx}' y1='${cy}' x2='${p.x}' y2='${p.y}' stroke='#DDDDDD' stroke-width='.5'/>`;});
-  radarSVG+=`<polygon points='${scorePoly}' fill='${niv.color}33' stroke='${niv.color}' stroke-width='2' stroke-linejoin='round'/>`;
-  DIMENSIONS.forEach((d,i)=>{const p=pt(i,scores[i]);radarSVG+=`<circle cx='${p.x}' cy='${p.y}' r='5' fill='${d.color}' stroke='#fff' stroke-width='1.5'/>`;});
-  radarSVG+=`<circle cx='${cx}' cy='${cy}' r='18' fill='${niv.color}33' stroke='${niv.color}' stroke-width='1'/>`;
-  radarSVG+=`<text x='${cx}' y='${cy+1}' text-anchor='middle' dominant-baseline='central' style='font-size:11px;font-weight:bold;fill:${niv.color}'>${globalPct}%</text>`;
-  DIMENSIONS.forEach((d,i)=>{
-    const l=lp(i);
-    const s=getDimScore(rep,d.id),max=getDimMax(d.id);
-    const a=ang(i)*180/Math.PI;
-    const anchor=Math.abs(a+90)<20||Math.abs(a-90)<20||Math.abs(a+270)<20?"middle":l.x>cx?"start":"end";
-    radarSVG+=`<text x='${l.x}' y='${l.y-5}' text-anchor='${anchor}' style='font-size:10px;font-weight:600;fill:${d.color}'>${d.label}</text>`;
-    radarSVG+=`<text x='${l.x}' y='${l.y+8}' text-anchor='${anchor}' style='font-size:9px;fill:#888'>${s}/${max}</text>`;
-  });
-  radarSVG+=`</svg>`;
+  buildRadarPNG(rep, niv, (radarB64) => {
+    const css=`
+body{font-family:Georgia,serif;font-size:11pt;color:#1A1A1A;line-height:1.75;margin:0}
+h1{font-size:14pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:4px;margin:0 0 14px}
+h2{font-size:12pt;color:#2A3A2A;margin:14px 0 6px}
+h3{font-size:11pt;color:#2A3A2A;margin:10px 0 4px}
+p{margin:0 0 10px}
+table{border-collapse:collapse;width:100%;margin:10px 0}
+th{background:#1A3A28;color:#fff;padding:7px 10px;text-align:left;font-size:10pt}
+td{border:1px solid #ddd;padding:6px 10px;font-size:10pt;vertical-align:top}
+.box{padding:12px 16px;margin:10px 0;border-left:4px solid;background:#F9F7F3}
+.m{color:#666;font-style:italic;font-size:10pt}
+.et{padding:5px 0 5px 16px;font-size:10pt;color:#333;border-bottom:1px solid #eee}
+.page{width:17cm;min-height:25.7cm;padding:2cm;box-sizing:border-box;page-break-after:always;position:relative}
+.page:last-child{page-break-after:avoid}
+.cover{text-align:center;padding-top:5cm}
+.foot{position:absolute;bottom:1.2cm;left:2cm;right:2cm;text-align:center;font-size:8.5pt;color:#999;border-top:1px solid #ddd;padding-top:6px}
+@page{size:A4;margin:0}
+@media print{body{margin:0}}`;
 
-  // ── Styles Word ──────────────────────────────────────────────
-  const css=`@page{size:A4;margin:2cm 2cm 2.5cm;mso-footer-margin:1.2cm}
-  @page{@bottom-center{content:'Diagnostic de transparence · Management Régénératif · Benjamin Chaminade';font-size:9pt;color:#888}}
-  body{font-family:Georgia,serif;font-size:11pt;color:#1A1A1A;line-height:1.7}
-  h1{font-size:15pt;color:#1A3A28;border-bottom:2px solid #1A3A28;padding-bottom:5px;margin-top:0;page-break-before:always}
-  h1.first{page-break-before:avoid}
-  h2{font-size:12pt;color:#2A3A2A;margin-top:16px;margin-bottom:6px}
-  h3{font-size:11pt;color:#2A3A2A;margin-top:12px}
-  table{border-collapse:collapse;width:100%;margin:10px 0;page-break-inside:avoid}
-  th{background:#1A3A28;color:#fff;padding:7px 10px;text-align:left;font-size:10pt}
-  td{border:1px solid #ddd;padding:6px 10px;font-size:10pt}
-  .box{padding:11px 15px;margin:10px 0;border-left:4px solid;background:#F9F7F3;page-break-inside:avoid}
-  .sec{page-break-before:always;padding-top:4px}
-  .m{color:#666;font-style:italic}
-  .et{padding:4px 0 4px 14px;font-size:10pt;color:#333;border-bottom:1px solid #eee}
-  .foot-txt{text-align:center;font-size:9pt;color:#888;margin-top:40px;padding-top:12px;border-top:1px solid #ddd}`;
+    const foot=`<div class='foot'>Diagnostic de transparence · Management Régénératif · Benjamin Chaminade</div>`;
 
-  let h=`<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><style>${css}</style></head><body>`;
+    let h=`<!DOCTYPE html><html><head><meta charset='utf-8'><style>${css}</style></head><body>`;
 
-  // PAGE 1 — COUVERTURE + SCORE
-  h+=`<div style='text-align:center;margin-bottom:28px;padding-top:60px'>
-    <p style='font-size:18pt;font-weight:bold;color:#1A3A28;margin:0'>POSITIONNEMENT DE TRANSPARENCE MANAGÉRIALE</p>
-    <p style='font-size:11pt;font-style:italic;color:#666;margin:8px 0'>Diagnostic personnel · Chapitre 10 · Management Régénératif</p>
-    <p style='font-size:10pt;color:#aaa'>${date}</p>
+    // ── PAGE 1 : COUVERTURE ──────────────────────────────────
+    h+=`<div class='page'>
+<div class='cover'>
+  <p style='font-size:9pt;color:#888;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px'>Management Régénératif · Chapitre 10</p>
+  <p style='font-size:22pt;font-weight:bold;color:#1A3A28;margin:0 0 8px;line-height:1.2'>Positionnement de<br>transparence managériale</p>
+  <p style='font-size:13pt;font-style:italic;color:#666;margin:0 0 40px'>${date}</p>
+  <div style='display:inline-block;padding:8px 24px;border-radius:24px;background:${niv.color};color:#fff;font-size:14pt;font-weight:bold;margin-bottom:16px'>
+    Niveau ${niv.num} · ${niv.nom}
   </div>
-  <h1 class='first'>Résultat global</h1>
-  <p><span style='font-size:26pt;font-weight:bold;color:${niv.color}'>${score}</span><span style='color:#aaa;font-size:12pt'> / 150 points · ${globalPct}%</span></p>
-  <p style='margin:8px 0'><span style='display:inline-block;padding:4px 16px;border-radius:10px;color:#fff;font-weight:bold;background:${niv.color}'>Niveau ${niv.num} · ${niv.nom}</span></p>
-  <p class='m' style='margin:4px 0 10px'>${niv.sousTitre}</p>
-  <h2>${profil.icon} ${profil.titre}</h2>
-  <div class='box' style='border-color:${niv.color}'>${profil.signal}</div>
-  <p class='m'>${niv.desc}</p>
-  <div class='box' style='border-color:${niv.color}'><strong>Action :</strong> ${niv.action}</div>`;
+  <p style='font-size:11pt;color:#666;font-style:italic;margin:8px 0 32px'>${niv.sousTitre}</p>
+  <p style='font-size:20pt;font-weight:bold;color:#1A1A1A;margin:0 0 4px'>${profil.icon} ${profil.titre}</p>
+  <p style='font-size:10pt;color:#888;margin:0'>${profil.signal}</p>
+</div>
+${foot}</div>`;
 
-  // PAGE 2 — RADAR
-  h+=`<div class='sec'><h1>Radar de transparence</h1>
-  <p class='m'>Score global : <strong style='color:${niv.color}'>${globalPct}%</strong> · Niveau ${niv.num} · ${niv.nom}</p>
-  <div style='text-align:center;margin:20px 0'>${radarSVG}</div>
-  <table style='margin-top:16px'><tr><th>Dimension</th><th>Score</th><th>%</th><th>Niveau</th></tr>`;
-  DIMENSIONS.forEach(d=>{const s=getDimScore(rep,d.id),max=getDimMax(d.id),pct=Math.round(s/max*100),nv=getDimNiv(s/max);
-    h+=`<tr><td style='color:${d.color};font-weight:600'>${d.icon} ${d.label}</td><td style='text-align:center;font-weight:bold;color:${d.color}'>${s}/${max}</td><td style='text-align:center;font-weight:bold;color:${nv.color}'>${pct}%</td><td style='color:${nv.color};font-weight:bold'>${nv.label}</td></tr>`;});
-  h+=`</table></div>`;
+    // ── PAGE 2 : SCORE + PROFIL ──────────────────────────────
+    h+=`<div class='page'>
+<h1>Résultat global et profil</h1>
+<table><tr>
+  <td style='width:35%;vertical-align:middle;text-align:center;border:none;padding:0 20px 0 0'>
+    <div style='font-size:52pt;font-weight:bold;color:${niv.color};line-height:1'>${score}</div>
+    <div style='font-size:11pt;color:#888'>/ 150 points</div>
+    <div style='font-size:14pt;color:#888'>${globalPct}%</div>
+    <div style='margin-top:12px;display:inline-block;padding:5px 14px;border-radius:20px;background:${niv.color};color:#fff;font-size:10pt;font-weight:bold'>
+      Niveau ${niv.num}
+    </div>
+  </td>
+  <td style='border:none;padding:0;vertical-align:top'>
+    <h2 style='margin-top:0'>${profil.icon} ${profil.titre}</h2>
+    <p>${profil.desc}</p>
+    <div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div>
+    <p class='m'>${niv.desc}</p>
+  </td>
+</tr></table>
+<div class='box' style='border-color:${niv.color};margin-top:16px'><strong>Action prioritaire :</strong> ${niv.action}</div>
+${foot}</div>`;
 
-  // PAGE 3 — PROFIL DE MANAGER
-  h+=`<div class='sec'><h1>Votre profil de manager</h1>
-  <h2>${profil.icon} ${profil.titre}</h2>
-  <p>${profil.desc}</p>
-  <div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div></div>`;
+    // ── PAGE 3 : RADAR ───────────────────────────────────────
+    h+=`<div class='page'>
+<h1>Radar de transparence managériale</h1>
+<p class='m'>Score global : <strong style='color:${niv.color}'>${globalPct}%</strong> · Niveau ${niv.num} · ${niv.nom}</p>
+<div style='text-align:center;margin:16px 0'>
+  <img src='${radarB64}' style='width:340px;height:340px;border-radius:8px' alt='Radar de transparence'/>
+</div>
+<table><tr><th>Dimension</th><th style='width:60px'>Score</th><th style='width:50px'>%</th><th style='width:110px'>Niveau</th></tr>`;
+    DIMENSIONS.forEach(d=>{
+      const s=getDimScore(rep,d.id),max=getDimMax(d.id),pct=Math.round(s/max*100),nv2=getDimNiv(s/max);
+      h+=`<tr>
+        <td><strong style='color:${d.color}'>${d.label}</strong></td>
+        <td style='text-align:center;font-weight:bold;color:${d.color}'>${s}/${max}</td>
+        <td style='text-align:center;font-weight:bold;color:${nv2.color}'>${pct}%</td>
+        <td style='color:${nv2.color};font-weight:bold'>${nv2.label}</td>
+      </tr>`;
+    });
+    h+=`</table>${foot}</div>`;
 
-  // PAGE 4 — DIRECTIVE
-  h+=`<div class='sec'><h1>La directive (UE) 2023/970 et votre situation</h1>
-  <h2>${directive.titre}</h2>
-  <p>${directive.texte}</p>
-  <div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div></div>`;
+    // ── PAGE 4 : DIRECTIVE ───────────────────────────────────
+    h+=`<div class='page'>
+<h1>Directive (UE) 2023/970 · Votre situation</h1>
+<h2>${directive.titre}</h2>
+<p>${directive.texte}</p>
+<div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div>
+<h2 style='margin-top:24px'>Ce que la directive impose</h2>
+<table>
+  <tr><th>Obligation</th><th style='width:110px'>Seuil requis</th><th style='width:60px'>Statut</th></tr>`;
+    [
+      {ob:"Afficher une fourchette salariale dans les offres d'emploi",niv2:3,label:"Niveau 3"},
+      {ob:"Interdire de demander l'historique salarial des candidats",niv2:1,label:"Niveau 1"},
+      {ob:"Permettre l'accès aux niveaux moyens de rémunération par sexe",niv2:3,label:"Niveau 3"},
+      {ob:"Justifier les écarts de rémunération supérieurs à 5%",niv2:3,label:"Niveau 3"},
+      {ob:"Publier des rapports d'écarts F/H (entreprises 100+)",niv2:3,label:"Niveau 3"},
+      {ob:"Répondre sous 2 mois aux demandes d'information salariale",niv2:2,label:"Niveau 2"},
+    ].forEach(item=>{
+      const done=niv.num>=item.niv2;
+      h+=`<tr><td style='font-size:9.5pt'>${item.ob}</td><td style='font-size:9pt;color:#666'>${item.label}</td><td style='text-align:center;color:${done?"#3A7A40":"#C0392B"};font-weight:bold'>${done?"✓":"·"}</td></tr>`;
+    });
+    h+=`</table>${foot}</div>`;
 
-  // PAGE 5 — SCORES PAR DIMENSION
-  h+=`<div class='sec'><h1>Scores par dimension</h1>
-  <table><tr><th>Dimension</th><th>Score</th><th>Niveau</th></tr>`;
-  DIMENSIONS.forEach(d=>{const s=getDimScore(rep,d.id),max=getDimMax(d.id),nv=getDimNiv(s/max);
-    h+=`<tr><td><strong style='color:${d.color}'>${d.icon} ${d.label}</strong><br><span style='font-size:9pt;color:#666'>${d.chapRef}</span></td><td style='text-align:center;font-weight:bold;color:${nv.color}'>${s}/${max}</td><td style='color:${nv.color};font-weight:bold'>${nv.label}</td></tr>`;});
-  h+=`</table></div>`;
+    // ── PAGE 5 : PRÉCONISATIONS ──────────────────────────────
+    h+=`<div class='page'>
+<h1>Vos 3 préconisations prioritaires</h1>
+<div class='box' style='border-color:${niv.color};margin-bottom:18px'>${niv.conseil}</div>`;
+    recos.forEach((r,i)=>{
+      h+=`<h2 style='color:${r.c}'>${i+1}. ${r.t}</h2>`;
+      r.etapes.forEach((e,j)=>{h+=`<div class='et'><strong>Étape ${j+1} :</strong> ${e}</div>`;});
+    });
+    h+=`${foot}</div>`;
 
-  // PAGE 6 — PRÉCONISATIONS
-  h+=`<div class='sec'><h1>Vos 3 préconisations prioritaires</h1>
-  <div class='box' style='border-color:${niv.color}'>${niv.conseil}</div>`;
-  recos.forEach((r,i)=>{
-    h+=`<h2 style='color:${r.c}'>${i+1}. ${r.t}</h2>`;
-    r.etapes.forEach((e,j)=>{h+=`<div class='et'><strong>Étape ${j+1} :</strong> ${e}</div>`;});
+    // ── PAGE 6 : DÉTAIL ──────────────────────────────────────
+    h+=`<div class='page'>
+<h1>Détail de vos réponses</h1>`;
+    DIMENSIONS.forEach(d=>{
+      const dq=QUESTIONS.filter(q=>q.dim===d.id);
+      h+=`<h2 style='color:${d.color}'>${d.label}</h2><table>
+<tr><th style='width:78%'>Question</th><th style='width:12%'>Note</th><th style='width:10%'>Label</th></tr>`;
+      dq.forEach(q=>{
+        const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);
+        h+=`<tr><td style='font-size:9pt'>${q.texte}</td>
+<td style='text-align:center;font-weight:bold;color:${e?e.bg:"#aaa"}'>${v}/5</td>
+<td style='font-size:8.5pt;color:${e?e.bg:"#aaa"}'>${e?e.label:"·"}</td></tr>`;
+      });
+      h+=`</table>`;
+    });
+    h+=`${foot}</div>`;
+
+    h+=`</body></html>`;
+
+    const blob=new Blob([h],{type:"application/msword;charset=utf-8"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");a.href=url;
+    a.download=`Transparence_Managériale_N${niv.num}_${new Date().toISOString().slice(0,10)}.doc`;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
   });
-  h+=`</div>`;
-
-  // PAGE 7 — DÉTAIL
-  h+=`<div class='sec'><h1>Détail de vos réponses par dimension</h1>`;
-  DIMENSIONS.forEach(d=>{
-    const dq=QUESTIONS.filter(q=>q.dim===d.id);
-    h+=`<h2 style='color:${d.color}'>${d.icon} ${d.label}</h2><table><tr><th>Question</th><th style='width:90px'>Réponse</th></tr>`;
-    dq.forEach(q=>{const v=rep[q.id]||0,e=ECHELLE.find(e=>e.val===v);
-      h+=`<tr><td style='font-size:9.5pt'>${q.texte}</td><td style='text-align:center;color:${e?e.bg:"#aaa"};font-weight:bold'>${v}/5<br><span style='font-size:8pt'>${e?e.label:"N/A"}</span></td></tr>`;});
-    h+=`</table>`;
-  });
-  h+=`</div>`;
-
-  // PIED DE PAGE
-  h+=`<div class='foot-txt'>Diagnostic de transparence · Management Régénératif · Benjamin Chaminade</div>`;
-  h+=`</body></html>`;
-
-  const blob=new Blob([h],{type:"application/msword"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;
-  a.download=`Transparence_Managériale_N${niv.num}_${new Date().toISOString().slice(0,10)}.doc`;
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
 // ── RADAR CHART ───────────────────────────────────────────────
