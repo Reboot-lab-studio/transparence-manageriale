@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Positionnement de Transparence Managériale — Management Régénératif</title>
+<title>Positionnement de Transparence Managériale · Management Régénératif</title>
 <meta name="description" content="Où en êtes-vous sur l'échelle de transparence managériale ? 30 questions pour situer votre niveau.">
 <meta name="author" content="Benjamin Chaminade">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔓</text></svg>">
@@ -480,7 +480,7 @@ h1, h2, h3 {
 const { useState } = React;
 
 const DIMENSIONS = [
-  { id:"operationnelle", label:"Opérationnelle", icon:"⚙", color:"#E07040", colorD:"rgba(224,112,64,.14)", chapRef:"Chapitre 10", desc:"Partager les objectifs, les contraintes et les critères de décision de chaque projet — la base qui permet à chacun de comprendre le « pourquoi » de son action." },
+  { id:"operationnelle", label:"Opérationnelle", icon:"⚙", color:"#E07040", colorD:"rgba(224,112,64,.14)", chapRef:"Chapitre 10", desc:"Partager les objectifs, les contraintes et les critères de décision de chaque projet · la base qui permet à chacun de comprendre le « pourquoi » de son action." },
   { id:"tactique",       label:"Tactique",       icon:"◈", color:"#5AAA60", colorD:"rgba(90,170,96,.14)",  chapRef:"Chapitre 10", desc:"Ouvrir l'accès aux indicateurs de performance, aux retours clients et aux analyses. Cette information nourrit la prise de décision collective." },
   { id:"strategique",    label:"Stratégique",    icon:"◎", color:"#4A90D0", colorD:"rgba(74,144,208,.14)", chapRef:"Chapitre 10", desc:"Exposer les choix d'orientation, les défis économiques et les opportunités. Cette vision transforme vos collaborateurs en partenaires de la réussite." },
   { id:"relationnelle",  label:"Relationnelle",  icon:"◉", color:"#9A70C8", colorD:"rgba(154,112,200,.14)",chapRef:"Chapitre 10", desc:"Qualité du feedback, reconnaissance des erreurs, cohérence entre ce qui est dit et ce qui est fait." },
@@ -489,34 +489,34 @@ const DIMENSIONS = [
 
 const QUESTIONS = [
   { id:"o1", dim:"operationnelle", texte:"Je communique systématiquement les objectifs de chaque projet ainsi que les contraintes qui encadrent les décisions.", context:"Ex : budget, délais imposés, dépendances organisationnelles, non-négociables." },
-  { id:"o2", dim:"operationnelle", texte:"Mes collaborateurs comprennent pourquoi les décisions sont prises, pas seulement ce qu'ils doivent faire.", context:"Le « pourquoi » avant le « comment » — c'est la base de l'autonomie réelle." },
+  { id:"o2", dim:"operationnelle", texte:"Mes collaborateurs comprennent pourquoi les décisions sont prises, pas seulement ce qu'ils doivent faire.", context:"Le « pourquoi » avant le « comment » · c'est la base de l'autonomie réelle." },
   { id:"o3", dim:"operationnelle", texte:"Je partage les critères que j'utilise pour prendre mes décisions, même quand elles sont impopulaires.", context:"Ex : critère de priorisation, arbitrage ressources, choix d'une mission sur une autre." },
   { id:"o4", dim:"operationnelle", texte:"Mes collaborateurs connaissent les règles du jeu de leur rémunération : les critères, la logique, la progression possible.", context:"Ils n'ont pas nécessairement accès aux chiffres des autres, mais ils comprennent la structure." },
   { id:"o5", dim:"operationnelle", texte:"Quand une contrainte organisationnelle m'empêche d'agir autrement, je l'explique plutôt que de laisser mon équipe interpréter.", context:"L'opacité sur les contraintes génère méfiance et sentiment d'injustice." },
   { id:"o6", dim:"operationnelle", texte:"Je communique les fourchettes salariales par poste ou les critères objectifs qui les déterminent.", context:"Conforme aux exigences de la directive (UE) 2023/970 attendue en juin 2026." },
   { id:"t1", dim:"tactique", texte:"Mes collaborateurs ont accès aux indicateurs de performance de l'équipe en temps quasi-réel, pas seulement en fin de trimestre.", context:"Tableaux de bord partagés, OKR visibles, résultats accessibles sans intermédiaire." },
-  { id:"t2", dim:"tactique", texte:"Je partage régulièrement les retours clients — positifs comme négatifs — avec l'ensemble de l'équipe.", context:"L'équipe qui n'entend jamais les clients perd le sens de son action." },
+  { id:"t2", dim:"tactique", texte:"Je partage régulièrement les retours clients · positifs comme négatifs · avec l'ensemble de l'équipe.", context:"L'équipe qui n'entend jamais les clients perd le sens de son action." },
   { id:"t3", dim:"tactique", texte:"Mes collaborateurs comprennent la position de notre équipe vis-à-vis des autres équipes ou de la concurrence.", context:"Analyses concurrentielles, benchmarks internes, positionnement sur les projets transverses." },
   { id:"t4", dim:"tactique", texte:"Quand les résultats sont mauvais, je l'annonce clairement et j'explique les causes plutôt que de minimiser.", context:"La transparence sur les difficultés est plus régénérative que le management par les bonnes nouvelles." },
   { id:"t5", dim:"tactique", texte:"Mes collaborateurs savent comment leurs actions individuelles contribuent aux résultats collectifs.", context:"Traçabilité de l'impact : chacun voit le lien entre son travail et les indicateurs de l'équipe." },
   { id:"t6", dim:"tactique", texte:"Je partage les analyses d'échecs et les post-mortems avec l'équipe, pas seulement les succès.", context:"L'erreur fertile : l'apprentissage collectif exige la transparence sur ce qui n'a pas fonctionné." },
   { id:"s1", dim:"strategique", texte:"Mes collaborateurs comprennent les enjeux économiques de l'organisation, pas seulement leur périmètre immédiat.", context:"Marges, pression budgétaire, enjeux de financement, risques stratégiques." },
   { id:"s2", dim:"strategique", texte:"Je partage les choix d'orientation et les arbitrages stratégiques, y compris ceux qui m'ont été difficiles.", context:"Les décisions qui touchent l'équipe doivent être expliquées, pas seulement annoncées." },
-  { id:"s3", dim:"strategique", texte:"Mes collaborateurs connaissent les opportunités de développement de l'organisation, pas seulement leurs propres perspectives.", context:"Roadmap produit, marchés visés, alliances potentielles — autant d'éléments qui donnent du sens." },
+  { id:"s3", dim:"strategique", texte:"Mes collaborateurs connaissent les opportunités de développement de l'organisation, pas seulement leurs propres perspectives.", context:"Roadmap produit, marchés visés, alliances potentielles · autant d'éléments qui donnent du sens." },
   { id:"s4", dim:"strategique", texte:"Je partage les incertitudes et les zones d'ombre stratégiques plutôt que de feindre une clarté que je n'ai pas.", context:"Un manager qui prétend tout savoir perd en crédibilité ce qu'il croit gagner en autorité." },
   { id:"s5", dim:"strategique", texte:"Mes collaborateurs sont impliqués dans les réflexions stratégiques qui les concernent, pas seulement informés après coup.", context:"Participation vs information : c'est le passage de la transparence à la coresponsabilité." },
   { id:"s6", dim:"strategique", texte:"Je communique les défis organisationnels auxquels je suis moi-même confronté en tant que manager.", context:"Montrer ses propres contraintes hiérarchiques désacralise la fonction et crée de l'empathie." },
-  { id:"r1", dim:"relationnelle", texte:"Je donne du feedback régulier et concret, pas seulement lors des entretiens annuels.", context:"Fréquence, qualité, équilibre positif/négatif — le feedback est le sel de la transparence relationnelle." },
+  { id:"r1", dim:"relationnelle", texte:"Je donne du feedback régulier et concret, pas seulement lors des entretiens annuels.", context:"Fréquence, qualité, équilibre positif/négatif · le feedback est le sel de la transparence relationnelle." },
   { id:"r2", dim:"relationnelle", texte:"J'assume mes erreurs managériales devant mon équipe quand elles se produisent.", context:"La reconnaissance de l'erreur par le manager donne la permission à l'équipe d'en faire autant." },
   { id:"r3", dim:"relationnelle", texte:"Je communique mes propres difficultés, mes doutes et mes limites quand c'est pertinent.", context:"Vulnérabilité managériale : l'authenticité crée plus de confiance que la posture de force permanente." },
   { id:"r4", dim:"relationnelle", texte:"Mes collaborateurs savent comment je fonctionne, ce qui m'énerve, mes zones d'exigence et mes modes de travail.", context:"Un « manuel d'utilisation » du manager réduit les malentendus et la peur d'interagir." },
   { id:"r5", dim:"relationnelle", texte:"Ce que je dis en réunion est cohérent avec ce que je dis en tête-à-tête.", context:"La dissonance entre discours public et privé est l'une des formes les plus destructrices d'opacité." },
   { id:"r6", dim:"relationnelle", texte:"Quand je change d'avis ou de priorité, je l'explique plutôt que d'appliquer le changement en silence.", context:"Les changements silencieux génèrent de l'insécurité. L'explication transforme le virage en confiance." },
   { id:"m1", dim:"temporelle", texte:"Je communique rapidement les changements de priorité et leurs raisons, sans laisser l'équipe dans le flou.", context:"Le silence lors des virages est l'une des sources de méfiance les plus courantes." },
-  { id:"m2", dim:"temporelle", texte:"Mes collaborateurs connaissent les vraies échéances — pas des marges artificielles que je crée pour me protéger.", context:"Les marges cachées créent un système de méfiance dès qu'elles sont découvertes." },
+  { id:"m2", dim:"temporelle", texte:"Mes collaborateurs connaissent les vraies échéances · pas des marges artificielles que je crée pour me protéger.", context:"Les marges cachées créent un système de méfiance dès qu'elles sont découvertes." },
   { id:"m3", dim:"temporelle", texte:"Je partage mes propres contraintes de temps et d'agenda plutôt que de disparaître dans des réunions inexpliquées.", context:"L'indisponibilité non expliquée génère des interprétations négatives inutiles." },
   { id:"m4", dim:"temporelle", texte:"Je partage honnêtement les tensions entre les urgences court terme et les projets de fond à long terme.", context:"La lucidité sur les tensions temporelles permet à l'équipe d'arbitrer avec vous plutôt que de subir." },
-  { id:"m5", dim:"temporelle", texte:"Mes collaborateurs comprennent les rythmes de l'organisation — les saisons de pression, les périodes de respiration.", context:"La prévisibilité des cycles réduit l'anxiété et améliore la préparation collective." },
+  { id:"m5", dim:"temporelle", texte:"Mes collaborateurs comprennent les rythmes de l'organisation · les saisons de pression, les périodes de respiration.", context:"La prévisibilité des cycles réduit l'anxiété et améliore la préparation collective." },
   { id:"m6", dim:"temporelle", texte:"Quand un projet est retardé ou annulé, j'annonce et j'explique rapidement plutôt d'attendre que l'information fuite.", context:"La transparence sur les mauvaises nouvelles partagée tôt est moins destructrice qu'un retard découvert." },
 ];
 
@@ -529,27 +529,27 @@ const ECHELLE = [
 ];
 
 const NIVEAUX = [
-  { num:0, nom:"Opacité",          color:"#E05252", bg:"rgba(224,82,82,.1)",   range:[6,30],
+  { num:0, nom:"Opacité",               sousTitre:"L'équipe exécute sans comprendre : ni les objectifs, ni les contraintes, ni les décisions",        color:"#E05252", bg:"rgba(224,82,82,.1)",   range:[6,30],
     desc:"La transparence est quasi absente. L'information est retenue par réflexe ou conviction hiérarchique. Ce modèle génère méfiance, rumeurs et désengagement progressif.",
     conseil:"Commencez par partager les contraintes et le « pourquoi » de vos décisions lors de votre prochaine réunion d'équipe. Un seul geste change la dynamique.",
     action:"Cette semaine : expliquez une décision récente en détaillant les 3 critères qui vous ont guidé." },
-  { num:1, nom:"Minimale",         color:"#E07040", bg:"rgba(224,112,64,.1)",  range:[31,54],
+  { num:1, nom:"Minimale",              sousTitre:"Le manager partage l'indispensable, mais filtre tout ce qui sort de la tâche immédiate",  color:"#E07040", bg:"rgba(224,112,64,.1)",  range:[31,54],
     desc:"Vous partagez l'essentiel mais restez sur vos gardes. Votre équipe sait ce qu'elle doit faire sans toujours comprendre pourquoi. Le manque d'accès aux indicateurs limite son autonomie.",
     conseil:"Ouvrez progressivement l'accès aux indicateurs de performance. Partagez les résultats en temps réel plutôt qu'en fin de période.",
     action:"Cette semaine : créez ou partagez un tableau de bord d'équipe accessible à tous." },
-  { num:2, nom:"Des critères",     color:"#C89030", bg:"rgba(200,144,48,.1)",  range:[55,78],
+  { num:2, nom:"Des critères",          sousTitre:"Le manager explique sa logique et ses critères de décision, sans ouvrir les données collectives", color:"#C89030", bg:"rgba(200,144,48,.1)",  range:[55,78],
     desc:"Vous expliquez votre logique et vos critères. Votre équipe comprend la philosophie sans voir tous les chiffres. Niveau solide. La prochaine marche : la dimension stratégique.",
-    conseil:"Renforcez la transparence tactique — partagez les retours clients et les analyses — puis progressez vers les enjeux stratégiques qui donnent du sens au quotidien.",
+    conseil:"Renforcez la transparence tactique · partagez les retours clients et les analyses · puis progressez vers les enjeux stratégiques qui donnent du sens au quotidien.",
     action:"Cette semaine : partagez un retour client ou une analyse concurrentielle en réunion d'équipe." },
-  { num:3, nom:"Des fourchettes",  color:"#5AAA60", bg:"rgba(90,170,96,.1)",   range:[79,102],
+  { num:3, nom:"Critères et indicateurs", sousTitre:"L'équipe accède aux indicateurs, aux retours clients et comprend une partie des enjeux stratégiques", color:"#5AAA60", bg:"rgba(90,170,96,.1)",   range:[79,102],
     desc:"Vous pratiquez une transparence substantielle. Votre équipe prend des décisions plus autonomes. C'est le niveau attendu par la directive (UE) 2023/970 pour juin 2026.",
-    conseil:"Consolidez la transparence relationnelle — feedback régulier, reconnaissance des erreurs, cohérence public/privé — pour ancrer la confiance qui rend la coresponsabilité durable.",
+    conseil:"Consolidez la transparence relationnelle · feedback régulier, reconnaissance des erreurs, cohérence public/privé · pour ancrer la confiance qui rend la coresponsabilité durable.",
     action:"Cette semaine : instaurez un rituel de feedback hebdomadaire de 15 minutes." },
-  { num:4, nom:"Interne totale",   color:"#4A90D0", bg:"rgba(74,144,208,.1)",  range:[103,126],
+  { num:4, nom:"Interne totale",        sousTitre:"Objectifs, contraintes, résultats, tensions et choix stratégiques sont partagés sans filtre en interne", color:"#4A90D0", bg:"rgba(74,144,208,.1)",  range:[103,126],
     desc:"Vous pratiquez une transparence avancée sur les cinq dimensions. Vos collaborateurs comprennent les enjeux en profondeur. Ce niveau crée une coresponsabilité authentique.",
-    conseil:"Maintenez cette transparence sous pression — budget serré, décisions difficiles, réorganisations. C'est là qu'elle se prouve ou s'effrite.",
+    conseil:"Maintenez cette transparence sous pression · budget serré, décisions difficiles, réorganisations. C'est là qu'elle se prouve ou s'effrite.",
     action:"Cette semaine : testez votre transparence sous pression en partageant une contrainte difficile." },
-  { num:5, nom:"Radicale",         color:"#8A70E0", bg:"rgba(138,112,224,.1)", range:[127,150],
+  { num:5, nom:"Radicale",              sousTitre:"La transparence est une culture : l'équipe co-construit les décisions avec la même information que le manager", color:"#8A70E0", bg:"rgba(138,112,224,.1)", range:[127,150],
     desc:"Vous incarnez la transparence managériale dans toutes ses dimensions avec une cohérence remarquable. Votre équipe fonctionne en partenaire de confiance.",
     conseil:"Votre rôle : essaimer. Partagez vos pratiques, accompagnez d'autres managers, devenez un référent de la culture de transparence dans votre organisation.",
     action:"Cette semaine : documentez une pratique de transparence qui fonctionne et partagez-la avec un collègue." },
@@ -557,29 +557,29 @@ const NIVEAUX = [
 
 const RECOS = {
   0: [
-    { t:"Choisir une réunion laboratoire", etapes:["Sélectionnez une décision récente que vous avez prise sans l'expliquer","Présentez-la à votre équipe en détaillant les 3 contraintes qui vous ont guidé","Observez et notez les réactions — méfiance, soulagement, questions ?"], c:"#E05252" },
+    { t:"Choisir une réunion laboratoire", etapes:["Sélectionnez une décision récente que vous avez prise sans l'expliquer","Présentez-la à votre équipe en détaillant les 3 contraintes qui vous ont guidé","Observez et notez les réactions · méfiance, soulagement, questions ?"], c:"#E05252" },
     { t:"Le « pourquoi » avant le « quoi »", etapes:["Choisissez une mission à déléguer cette semaine","Avant d'expliquer le « comment », expliquez le contexte, l'enjeu et pourquoi cette mission compte","Vérifiez que la personne a bien compris le sens, pas seulement la tâche"], c:"#E07040" },
     { t:"Identifier vos réticences profondes", etapes:["Listez 3 informations que vous retenez habituellement","Pour chacune, posez-vous : est-ce une vraie raison (confidentialité, sécurité) ou un réflexe de contrôle ?","Commencez à partager celle qui comporte le moins de risque réel"], c:"#C89030" }
   ],
   1: [
-    { t:"Ouvrir le tableau de bord d'équipe", etapes:["Identifiez les 3 indicateurs clés que votre équipe ne voit pas en temps réel","Créez ou partagez un accès direct — même un fichier simple suffit pour commencer","Expliquez en réunion comment lire ces indicateurs et ce qu'ils signifient"], c:"#E07040" },
-    { t:"La séance retours clients", etapes:["Sélectionnez un vrai retour client — positif ou négatif — reçu cette semaine","Lisez-le en réunion d'équipe, sans filtre","Analysez ensemble : qu'est-ce que cela nous dit sur notre travail ?"], c:"#5AAA60" },
+    { t:"Ouvrir le tableau de bord d'équipe", etapes:["Identifiez les 3 indicateurs clés que votre équipe ne voit pas en temps réel","Créez ou partagez un accès direct · même un fichier simple suffit pour commencer","Expliquez en réunion comment lire ces indicateurs et ce qu'ils signifient"], c:"#E07040" },
+    { t:"La séance retours clients", etapes:["Sélectionnez un vrai retour client · positif ou négatif · reçu cette semaine","Lisez-le en réunion d'équipe, sans filtre","Analysez ensemble : qu'est-ce que cela nous dit sur notre travail ?"], c:"#5AAA60" },
     { t:"Expliquer un résultat décevant", etapes:["Choisissez un résultat récent inférieur aux attentes","Présentez-le avec ses vraies causes, sans minimiser ni chercher un coupable","Invitez l'équipe à proposer une analyse collective"], c:"#C89030" }
   ],
   2: [
-    { t:"Session « enjeux stratégiques »", etapes:["Planifiez 45 minutes en dehors de l'agenda habituel","Partagez 2 ou 3 enjeux économiques ou stratégiques que vous portez seul","Invitez l'équipe à réagir — pas à décider, mais à comprendre"], c:"#C89030" },
+    { t:"Session « enjeux stratégiques »", etapes:["Planifiez 45 minutes en dehors de l'agenda habituel","Partagez 2 ou 3 enjeux économiques ou stratégiques que vous portez seul","Invitez l'équipe à réagir · pas à décider, mais à comprendre"], c:"#C89030" },
     { t:"Instaurer le rituel de feedback", etapes:["Annoncez en réunion l'instauration d'un tour de 15 min le vendredi","Commencez vous-même : une réussite, une difficulté, un besoin de votre semaine","Tenez le cap 4 semaines, même quand c'est inconfortable"], c:"#5AAA60" },
     { t:"Nommer vos contraintes à voix haute", etapes:["La prochaine fois que vous refusez une demande, préparez l'explication de la contrainte réelle","Dites « Je ne peux pas parce que… » plutôt que « Ce n'est pas possible »","Notez la différence de réaction dans l'équipe"], c:"#4A90D0" }
   ],
   3: [
     { t:"La question directe", etapes:["En réunion d'équipe : posez la question « Qu'est-ce que vous aimeriez savoir que vous ne savez pas ? »","Notez les réponses sans vous justifier dans l'instant","Traitez chaque réponse la semaine suivante avec une décision claire : je partage / je ne peux pas partager / je vais voir"], c:"#5AAA60" },
-    { t:"Auditer la cohérence public/privé", etapes:["Après votre prochaine réunion d'équipe, notez les 3 messages principaux que vous avez passés","Comparez-les avec ce que vous dites en tête-à-tête sur les mêmes sujets","Identifiez et réduisez les écarts — ils sont la source principale de méfiance"], c:"#4A90D0" },
-    { t:"Partager une vraie incertitude", etapes:["Identifiez un sujet stratégique sur lequel vous n'avez pas de réponse","Présentez-le à l'équipe comme une incertitude réelle, pas un problème à résoudre","Invitez les hypothèses — sans promettre que l'équipe décidera"], c:"#8A70E0" }
+    { t:"Auditer la cohérence public/privé", etapes:["Après votre prochaine réunion d'équipe, notez les 3 messages principaux que vous avez passés","Comparez-les avec ce que vous dites en tête-à-tête sur les mêmes sujets","Identifiez et réduisez les écarts · ils sont la source principale de méfiance"], c:"#4A90D0" },
+    { t:"Partager une vraie incertitude", etapes:["Identifiez un sujet stratégique sur lequel vous n'avez pas de réponse","Présentez-le à l'équipe comme une incertitude réelle, pas un problème à résoudre","Invitez les hypothèses · sans promettre que l'équipe décidera"], c:"#8A70E0" }
   ],
   4: [
     { t:"Le test de résistance sous pression", etapes:["Identifiez la prochaine décision difficile que vous devez annoncer","Préparez comment la partager avec transparence avant qu'elle n'arrive","Annoncez-la vous-même, avant que l'information ne fuite"], c:"#4A90D0" },
     { t:"Codesigner les rituels de transparence", etapes:["Organisez 30 minutes avec l'équipe pour co-définir vos rituels : quels indicateurs partager, à quelle fréquence, sous quelle forme","Laissez l'équipe proposer et tranchez ensemble","Révisez dans 6 semaines"], c:"#8A70E0" },
-    { t:"Documenter et transmettre", etapes:["Rédigez en une page vos 3 pratiques de transparence qui fonctionnent le mieux","Partagez-les avec un collègue manager ou en réunion de pairs","Proposez un échange de pratiques — c'est le début de l'essaimage culturel (chapitre 13)"], c:"#5AAA60" }
+    { t:"Documenter et transmettre", etapes:["Rédigez en une page vos 3 pratiques de transparence qui fonctionnent le mieux","Partagez-les avec un collègue manager ou en réunion de pairs","Proposez un échange de pratiques · c'est le début de l'essaimage culturel (chapitre 13)"], c:"#5AAA60" }
   ],
   5: [
     { t:"Devenir référent transparence", etapes:["Identifiez un manager de votre organisation qui souhaite progresser sur la transparence","Proposez-lui 3 séances d'échange de pratiques d'une heure","Documentez ce que vous observez : c'est votre propre capital managérial"], c:"#8A70E0" },
@@ -589,21 +589,21 @@ const RECOS = {
 };
 
 const PROFILS_MANAGER = {
-  0: { titre:"Le manager forteresse", desc:"Vous gérez en silo. L'information est une ressource que vous protégez, consciemment ou non. Votre équipe travaille dans le brouillard : elle exécute sans comprendre. Ce mode génère de l'efficacité à court terme et de la dépendance à long terme. Les collaborateurs talentueux partent en premier, car ce sont eux qui ont le plus besoin de sens.", signal:"Signal caractéristique : vos collaborateurs vous posent souvent les mêmes questions ou prennent des décisions à côté de ce que vous attendiez — non par incompétence, mais par manque d'information.", icon:"🏰" },
-  1: { titre:"Le manager filtre", desc:"Vous partagez ce que vous jugez nécessaire, pas plus. Vous avez un instinct protecteur qui vous pousse à filtrer l'information pour « ne pas inquiéter » ou « ne pas perdre le contrôle ». Vos collaborateurs ressentent cette retenue et comblent les manques par des interprétations — souvent plus anxiogènes que la réalité.", signal:"Signal caractéristique : des rumeurs circulent dans votre équipe sur des sujets que vous pensez avoir traités. L'information est là, mais mal calibrée.", icon:"🔽" },
-  2: { titre:"Le manager pédagogue", desc:"Vous expliquez votre logique et vos critères. Vos collaborateurs comprennent votre façon de penser, même s'ils n'ont pas accès à tous les chiffres. C'est un niveau solide qui donne de la lisibilité. Votre limite : la transparence reste descendante — vous expliquez, mais vous n'ouvrez pas encore les espaces de dialogue sur les enjeux.", signal:"Signal caractéristique : vos collaborateurs comprennent vos décisions mais ne se sentent pas encore partenaires de leur formulation.", icon:"📖" },
+  0: { titre:"Le manager forteresse", desc:"Vous gérez en silo. L'information est une ressource que vous protégez, consciemment ou non. Votre équipe travaille dans le brouillard : elle exécute sans comprendre. Ce mode génère de l'efficacité à court terme et de la dépendance à long terme. Les collaborateurs talentueux partent en premier, car ce sont eux qui ont le plus besoin de sens.", signal:"Signal caractéristique : vos collaborateurs vous posent souvent les mêmes questions ou prennent des décisions à côté de ce que vous attendiez · non par incompétence, mais par manque d'information.", icon:"🏰" },
+  1: { titre:"Le manager filtre", desc:"Vous partagez ce que vous jugez nécessaire, pas plus. Vous avez un instinct protecteur qui vous pousse à filtrer l'information pour « ne pas inquiéter » ou « ne pas perdre le contrôle ». Vos collaborateurs ressentent cette retenue et comblent les manques par des interprétations · souvent plus anxiogènes que la réalité.", signal:"Signal caractéristique : des rumeurs circulent dans votre équipe sur des sujets que vous pensez avoir traités. L'information est là, mais mal calibrée.", icon:"🔽" },
+  2: { titre:"Le manager pédagogue", desc:"Vous expliquez votre logique et vos critères. Vos collaborateurs comprennent votre façon de penser, même s'ils n'ont pas accès à tous les chiffres. C'est un niveau solide qui donne de la lisibilité. Votre limite : la transparence reste descendante · vous expliquez, mais vous n'ouvrez pas encore les espaces de dialogue sur les enjeux.", signal:"Signal caractéristique : vos collaborateurs comprennent vos décisions mais ne se sentent pas encore partenaires de leur formulation.", icon:"📖" },
   3: { titre:"Le manager partenaire", desc:"Vous pratiquez une transparence substantielle et progressive. Votre équipe accède aux indicateurs, aux retours clients et à une part des enjeux stratégiques. Ce niveau est rare : il crée une autonomie décisionnelle réelle. La directive (UE) 2023/970 reconnaît ce niveau comme le standard attendu pour 2026.", signal:"Signal caractéristique : vos collaborateurs prennent des décisions adaptées sans vous consulter et s'approprient les objectifs collectifs.", icon:"🤝" },
-  4: { titre:"Le manager écosystème", desc:"Vous avez fait de la transparence une culture, pas une pratique. Vos collaborateurs comprennent les enjeux en profondeur — opérationnels, tactiques, stratégiques, relationnels et temporels. Ce niveau transforme une équipe en communauté de pratique, où chacun arbitre avec la même information que vous.", signal:"Signal caractéristique : vos collaborateurs vous challengent sur vos propres décisions avec des arguments pertinents. C'est une réussite, pas une menace.", icon:"🌿" },
-  5: { titre:"Le manager régénératif total", desc:"Vous incarnez la transparence managériale comme principe de vie au travail. Votre équipe fonctionne en partenaire de confiance et prend des décisions de qualité parce qu'elle comprend exactement les enjeux. Vous êtes un modèle rare. Votre prochain défi n'est plus personnel — c'est l'essaimage.", signal:"Signal caractéristique : d'autres équipes cherchent à s'inspirer de vos pratiques. Des collègues managers vous demandent conseil.", icon:"✦" },
+  4: { titre:"Le manager écosystème", desc:"Vous avez fait de la transparence une culture, pas une pratique. Vos collaborateurs comprennent les enjeux en profondeur · opérationnels, tactiques, stratégiques, relationnels et temporels. Ce niveau transforme une équipe en communauté de pratique, où chacun arbitre avec la même information que vous.", signal:"Signal caractéristique : vos collaborateurs vous challengent sur vos propres décisions avec des arguments pertinents. C'est une réussite, pas une menace.", icon:"🌿" },
+  5: { titre:"Le manager régénératif total", desc:"Vous incarnez la transparence managériale comme principe de vie au travail. Votre équipe fonctionne en partenaire de confiance et prend des décisions de qualité parce qu'elle comprend exactement les enjeux. Vous êtes un modèle rare. Votre prochain défi n'est plus personnel · c'est l'essaimage.", signal:"Signal caractéristique : d'autres équipes cherchent à s'inspirer de vos pratiques. Des collègues managers vous demandent conseil.", icon:"✦" },
 };
 
 const DIRECTIVE_INFO = {
-  0: { titre:"Ce que la directive change pour vous — et pourquoi c'est urgent", texte:"La directive (UE) 2023/970 impose à toutes les entreprises dès 1 salarié de communiquer une fourchette de rémunération avant le premier entretien de recrutement, d'interdire de demander l'historique salarial des candidats, et de rendre accessibles les critères de rémunération. Pour votre niveau d'opacité actuel, cette directive représente un choc réglementaire important. Le risque immédiat : des candidats refusant vos offres sans fourchette affichée, des salariés demandant des justifications que vous n'avez pas formalisées, et des sanctions dès juin 2026.", urgence:"Votre priorité réglementaire : formaliser et communiquer les critères de rémunération par poste avant toute autre démarche de transparence." },
+  0: { titre:"Ce que la directive change pour vous · et pourquoi c'est urgent", texte:"La directive (UE) 2023/970 impose à toutes les entreprises dès 1 salarié de communiquer une fourchette de rémunération avant le premier entretien de recrutement, d'interdire de demander l'historique salarial des candidats, et de rendre accessibles les critères de rémunération. Pour votre niveau d'opacité actuel, cette directive représente un choc réglementaire important. Le risque immédiat : des candidats refusant vos offres sans fourchette affichée, des salariés demandant des justifications que vous n'avez pas formalisées, et des sanctions dès juin 2026.", urgence:"Votre priorité réglementaire : formaliser et communiquer les critères de rémunération par poste avant toute autre démarche de transparence." },
   1: { titre:"Ce que la directive change pour vous", texte:"Vous satisfaites à l'obligation minimale (chaque salarié connaît son salaire), mais la directive va bien au-delà. Elle impose la communication de fourchettes salariales aux candidats avant entretien, l'accès des salariés aux niveaux moyens de rémunération par catégorie et par sexe, et l'interdiction de demander l'historique salarial. Ce passage du niveau 1 au niveau 3 est obligatoire d'ici juin 2026 pour les entreprises de 50+ salariés.", urgence:"Votre priorité réglementaire : documenter et communiquer les fourchettes salariales par poste. C'est la base de la conformité 2026." },
-  2: { titre:"La directive confirme votre direction — et l'accélère", texte:"Vous êtes sur la bonne voie. Vos critères de rémunération sont expliqués, ce qui correspond à l'esprit de la directive. Mais le texte exige deux éléments supplémentaires que vous n'avez probablement pas encore : les fourchettes accessibles aux candidats avant entretien, et le droit des salariés à connaître les niveaux moyens de rémunération par sexe et par catégorie. L'objectif juin 2026 est à portée si vous accélérez.", urgence:"Votre priorité réglementaire : passer des critères expliqués aux fourchettes publiées, en interne d'abord, dans les offres d'emploi ensuite." },
+  2: { titre:"La directive confirme votre direction · et l'accélère", texte:"Vous êtes sur la bonne voie. Vos critères de rémunération sont expliqués, ce qui correspond à l'esprit de la directive. Mais le texte exige deux éléments supplémentaires que vous n'avez probablement pas encore : les fourchettes accessibles aux candidats avant entretien, et le droit des salariés à connaître les niveaux moyens de rémunération par sexe et par catégorie. L'objectif juin 2026 est à portée si vous accélérez.", urgence:"Votre priorité réglementaire : passer des critères expliqués aux fourchettes publiées, en interne d'abord, dans les offres d'emploi ensuite." },
   3: { titre:"Vous êtes dans la cible de la directive", texte:"Le niveau 3 est précisément ce que la directive (UE) 2023/970 impose aux entreprises de 50+ salariés d'ici juin 2026 : transparence des fourchettes aux candidats, accès aux médianes pour les salariés, publication des indicateurs d'écart F/H. Vous avez probablement l'essentiel. Il vous reste à vérifier que la transparence est formalisée (pas seulement pratiquée), documentée et auditable. La directive prévoit des sanctions allant jusqu'à 1% de la masse salariale et l'exclusion des marchés publics.", urgence:"Votre priorité réglementaire : audit de conformité et documentation formelle de vos pratiques de transparence salariale." },
-  4: { titre:"Vous dépassez les exigences de la directive", texte:"La directive (UE) 2023/970 impose le niveau 3. Vous êtes au niveau 4. Votre défi n'est pas réglementaire — c'est culturel. Comment maintenir cette transparence lors des moments de pression organisationnelle ? Comment la diffuser au-delà de votre équipe ? La directive peut être un levier pour convaincre votre direction que votre approche est à la fois éthique et conforme.", urgence:"Votre priorité réglementaire : documenter vos pratiques pour faciliter l'audit de conformité et servir de modèle interne." },
-  5: { titre:"Vous êtes un modèle de conformité avancée", texte:"La directive (UE) 2023/970 exige le niveau 3. Vous êtes au niveau 5. Votre organisation est non seulement conforme mais en avance significative. Ce positionnement est un avantage employeur réel — les candidats et les salariés choisissent de plus en plus les organisations transparentes. Votre rôle : documenter, partager et influencer les standards de votre secteur.", urgence:"Votre opportunité : faire de votre niveau de transparence un argument de marque employeur et un levier de différenciation sur le marché des talents." },
+  4: { titre:"Vous dépassez les exigences de la directive", texte:"La directive (UE) 2023/970 impose le niveau 3. Vous êtes au niveau 4. Votre défi n'est pas réglementaire · c'est culturel. Comment maintenir cette transparence lors des moments de pression organisationnelle ? Comment la diffuser au-delà de votre équipe ? La directive peut être un levier pour convaincre votre direction que votre approche est à la fois éthique et conforme.", urgence:"Votre priorité réglementaire : documenter vos pratiques pour faciliter l'audit de conformité et servir de modèle interne." },
+  5: { titre:"Vous êtes un modèle de conformité avancée", texte:"La directive (UE) 2023/970 exige le niveau 3. Vous êtes au niveau 5. Votre organisation est non seulement conforme mais en avance significative. Ce positionnement est un avantage employeur réel · les candidats et les salariés choisissent de plus en plus les organisations transparentes. Votre rôle : documenter, partager et influencer les standards de votre secteur.", urgence:"Votre opportunité : faire de votre niveau de transparence un argument de marque employeur et un levier de différenciation sur le marché des talents." },
 };
 
 function getTotalScore(rep) { return QUESTIONS.reduce((s,q)=>s+(rep[q.id]||0),0); }
@@ -628,8 +628,17 @@ function generateWord(rep) {
   // COUVERTURE
   h+=`<div style='text-align:center;margin-bottom:36px'><p style='font-size:18pt;font-weight:bold;color:#1A3A28'>POSITIONNEMENT DE TRANSPARENCE MANAGÉRIALE</p><p style='font-size:11pt;font-style:italic;color:#666;margin:6px 0'>Diagnostic personnel · Chapitre 10 · Management Régénératif</p><p style='font-size:10pt;color:#aaa'>${date}</p></div>`;
   // SCORE
-  h+=`<h1>Résultat global</h1><p><span style='font-size:26pt;font-weight:bold;color:${niv.color}'>${score}</span><span style='color:#aaa;font-size:12pt'> / 150 points</span></p><p style='margin:8px 0'><span style='display:inline-block;padding:4px 16px;border-radius:10px;color:#fff;font-weight:bold;background:${niv.color}'>Niveau ${niv.num} — ${niv.nom}</span></p><p class='m' style='margin:12px 0'>${niv.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Action cette semaine :</strong> ${niv.action}</div>`;
-  // PROFIL
+  h+=`<h1>Résultat global</h1><p><span style='font-size:26pt;font-weight:bold;color:${niv.color}'>${score}</span><span style='color:#aaa;font-size:12pt'> / 150 points</span></p><p style='margin:8px 0'><span style='display:inline-block;padding:4px 16px;border-radius:10px;color:#fff;font-weight:bold;background:${niv.color}'>Niveau ${niv.num} · ${niv.nom}</span></p><p style='color:#666;font-style:italic;margin:4px 0 10px'>${niv.sousTitre}</p><h2>${profil.icon} Profil de transparence managériale : ${profil.titre}</h2><div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div><p class='m' style='margin:12px 0'>${niv.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Action cette semaine :</strong> ${niv.action}</div>`;
+  // RADAR (représentation Word : tableau radial stylisé)
+  const radarRows = DIMENSIONS.map(d=>{
+    const s=getDimScore(rep,d.id),max=getDimMax(d.id);
+    const pct=Math.round(s/max*100);
+    const bars=Math.round(pct/10);
+    const bar='█'.repeat(bars)+'░'.repeat(10-bars);
+    const nv=getDimNiv(s/max);
+    return `<tr><td style='font-size:10pt'>${d.icon} ${d.label}</td><td style='font-family:monospace;font-size:9pt;color:${d.color};letter-spacing:1px'>${bar}</td><td style='text-align:center;font-weight:bold;color:${nv.color};font-size:10pt'>${pct}%</td><td style='color:${nv.color};font-size:9pt'>${nv.label}</td></tr>`;
+  }).join('');
+  h+=`<div class='pb'></div><h1>Radar de transparence</h1><p class='m'>Vue synthétique de vos 5 dimensions · Score global : <strong style='color:${niv.color}'>${Math.round(score/150*100)}%</strong> · Niveau ${niv.num} · ${niv.nom}</p><table style='margin-top:12px'><tr><th>Dimension</th><th>Niveau visuel</th><th>%</th><th>Qualification</th></tr>${radarRows}</table><div class='box' style='border-color:${niv.color};margin-top:14px'><strong>Score global :</strong> ${score} / 150 points · Niveau ${niv.num} · ${niv.nom}<br>${niv.desc}</div>`;
   h+=`<div class='pb'></div><h1>Votre profil de manager</h1><h2>${profil.icon} ${profil.titre}</h2><p>${profil.desc}</p><div class='box' style='border-color:${niv.color}'><strong>Signal caractéristique :</strong> ${profil.signal}</div>`;
   // DIRECTIVE
   h+=`<div class='pb'></div><h1>La directive (UE) 2023/970 et votre situation</h1><h2>${directive.titre}</h2><p>${directive.texte}</p><div class='box' style='border-color:#2A6090;background:#EEF4FB'><strong>Priorité réglementaire :</strong> ${directive.urgence}</div>`;
@@ -661,13 +670,181 @@ function generateWord(rep) {
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
-// ── COMPOSANTS ────────────────────────────────────────────────
+// ── RADAR CHART ───────────────────────────────────────────────
+function RadarChart({ rep, niv }) {
+  const [animated, setAnimated] = React.useState(false);
+  React.useEffect(() => { const t = setTimeout(() => setAnimated(true), 100); return () => clearTimeout(t); }, []);
 
+  const cx = 200, cy = 200, R = 150, sides = 5;
+  const dims = DIMENSIONS;
+
+  // Calcul des scores normalisés (0-1)
+  const scores = dims.map(d => {
+    const s = getDimScore(rep, d.id);
+    const max = getDimMax(d.id);
+    return s / max;
+  });
+
+  // Score global normalisé
+  const totalScore = getTotalScore(rep);
+  const globalPct = totalScore / 150;
+
+  // Angle de départ : haut (−π/2)
+  const angle = (i) => (Math.PI * 2 * i / sides) - Math.PI / 2;
+
+  // Point sur l'axe à distance r (0-1)
+  const pt = (i, r) => ({
+    x: cx + R * r * Math.cos(angle(i)),
+    y: cy + R * r * Math.sin(angle(i)),
+  });
+
+  // Grille : cercles à 20%, 40%, 60%, 80%, 100%
+  const gridLevels = [.2, .4, .6, .8, 1];
+
+  // Polygone de la grille
+  const gridPoly = (r) => dims.map((_,i) => {
+    const p = pt(i, r);
+    return `${p.x},${p.y}`;
+  }).join(" ");
+
+  // Polygone des scores (animé)
+  const scorePoly = dims.map((_,i) => {
+    const p = pt(i, animated ? scores[i] : 0);
+    return `${p.x},${p.y}`;
+  }).join(" ");
+
+  // Labels axes
+  const labelOffset = 22;
+  const labelPt = (i) => {
+    const a = angle(i);
+    return {
+      x: cx + (R + labelOffset) * Math.cos(a),
+      y: cy + (R + labelOffset) * Math.sin(a),
+    };
+  };
+
+  return (
+    <div style={{
+      background:"var(--bg2)",
+      border:"1px solid var(--border)",
+      borderRadius:16,
+      padding:"24px 16px 16px",
+      marginBottom:20,
+    }}>
+      <div style={{textAlign:"center",marginBottom:4}}>
+        <div style={{fontSize:".68rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".08em",color:"var(--muted)",marginBottom:6}}>
+          Radar de transparence
+        </div>
+      </div>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:20,flexWrap:"wrap"}}>
+        <svg width="400" height="400" viewBox="0 0 400 400" style={{maxWidth:"100%",overflow:"visible"}}>
+          {/* Grille */}
+          {gridLevels.map((r,li) => (
+            <polygon key={li}
+              points={gridPoly(r)}
+              fill="none"
+              stroke={li===4?"rgba(255,255,255,.15)":"rgba(255,255,255,.06)"}
+              strokeWidth={li===4?.8:.5}
+            />
+          ))}
+          {/* Axes */}
+          {dims.map((_,i) => {
+            const p = pt(i, 1);
+            return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="rgba(255,255,255,.08)" strokeWidth=".5"/>;
+          })}
+          {/* Zone score · animée */}
+          <polygon
+            points={scorePoly}
+            fill={`${niv.color}22`}
+            stroke={niv.color}
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+            style={{transition:"all 1.2s cubic-bezier(.4,0,.2,1)"}}
+          />
+          {/* Points sur les axes */}
+          {dims.map((_,i) => {
+            const p = pt(i, animated ? scores[i] : 0);
+            return (
+              <circle key={i} cx={p.x} cy={p.y} r="4"
+                fill={niv.color}
+                stroke="var(--bg2)"
+                strokeWidth="2"
+                style={{transition:`all 1.2s cubic-bezier(.4,0,.2,1) ${i*80}ms`}}
+              />
+            );
+          })}
+          {/* Centre · score global */}
+          <circle cx={cx} cy={cy} r={animated ? R * globalPct * .18 + 6 : 6}
+            fill={`${niv.color}40`} stroke={niv.color} strokeWidth="1"
+            style={{transition:"all 1.4s cubic-bezier(.4,0,.2,1)"}}
+          />
+          <text x={cx} y={cy+1} textAnchor="middle" dominantBaseline="central"
+            style={{fontFamily:"'Playfair Display',serif",fontSize:"10px",fontWeight:700,fill:niv.color}}>
+            {Math.round(globalPct*100)}%
+          </text>
+          {/* Labels axes */}
+          {dims.map((d,i) => {
+            const lp = labelPt(i);
+            const a = angle(i) * 180 / Math.PI;
+            const isTop = Math.abs(a + 90) < 30;
+            const isBottom = Math.abs(a - 90) < 30 || Math.abs(a + 270) < 30;
+            const anchor = isTop || isBottom ? "middle" : lp.x > cx ? "start" : "end";
+            const s = getDimScore(rep, d.id);
+            const max = getDimMax(d.id);
+            return (
+              <g key={d.id}>
+                <text x={lp.x} y={lp.y - 5} textAnchor={anchor}
+                  style={{fontFamily:"'Outfit',sans-serif",fontSize:"10px",fontWeight:600,fill:d.color}}>
+                  {d.label}
+                </text>
+                <text x={lp.x} y={lp.y + 8} textAnchor={anchor}
+                  style={{fontFamily:"'Outfit',sans-serif",fontSize:"9px",fill:"rgba(255,255,255,.4)"}}>
+                  {s}/{max}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+        {/* Légende 2 colonnes */}
+        <div style={{width:"100%",maxWidth:400}}>
+          <div style={{fontSize:".68rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".06em",color:"var(--muted)",marginBottom:10}}>Légende</div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px 16px",marginBottom:12}}>
+            {dims.map(d => {
+              const s = getDimScore(rep, d.id);
+              const max = getDimMax(d.id);
+              const pct = Math.round(s/max*100);
+              const nv = getDimNiv(s/max);
+              return (
+                <div key={d.id} style={{display:"flex",alignItems:"center",gap:8}}>
+                  <div style={{width:8,height:8,borderRadius:"50%",background:d.color,flexShrink:0}}/>
+                  <div>
+                    <div style={{fontSize:".75rem",fontWeight:600,color:d.color,lineHeight:1.2}}>{d.label}</div>
+                    <div style={{fontSize:".68rem",color:"var(--muted)"}}>{pct}% · {nv.label}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div style={{borderTop:"1px solid var(--faint)",paddingTop:10,display:"flex",alignItems:"center",gap:10}}>
+            <div style={{width:10,height:10,borderRadius:"50%",background:niv.color,border:`2px solid ${niv.color}`,flexShrink:0}}/>
+            <div>
+              <div style={{fontSize:".78rem",fontWeight:700,color:niv.color}}>Global : {Math.round(globalPct*100)}%</div>
+              <div style={{fontSize:".68rem",color:"var(--muted)"}}>Niveau {niv.num} · {niv.nom}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── APP ────────────────────────────────────────────────────────
 function App() {
   const [rep, setRep] = useState({});
   const [dim, setDim] = useState("operationnelle");
-  const [phase, setPhase] = useState("intro"); // intro | quiz | results
+  const [phase, setPhase] = useState("intro");
   const [resTab, setResTab] = useState("profil");
+  const [confirmDl, setConfirmDl] = useState(false);
 
   const curDim = DIMENSIONS.find(d=>d.id===dim);
   const dimQs = QUESTIONS.filter(q=>q.dim===dim);
@@ -685,21 +862,25 @@ function App() {
         <div className="header-tag">Chapitre 10 · Management Régénératif</div>
         <h1>Votre niveau de <em>transparence</em> managériale</h1>
         <div className="header-divider" />
-        <p className="sub">30 questions · 5 dimensions · un positionnement sur l'échelle de transparence du management régénératif. Pas un score de performance — une boussole pour progresser.</p>
+        <p className="sub">30 questions · 5 dimensions · un positionnement sur l'échelle de transparence du management régénératif. Pas un score de performance, une boussole pour progresser.</p>
       </div>
 
       <div className="ladder">
-        {NIVEAUX.map(n=>(
-          <div key={n.num} className="ladder-step" style={{borderColor:`${n.color}30`}}>
-            <div className="ls-num" style={{color:n.color}}>{n.num}</div>
-            <div className="ls-label" style={{color:n.color}}>{n.nom}</div>
-          </div>
-        ))}
+        {NIVEAUX.map(n=>{
+          const p = PROFILS_MANAGER[n.num];
+          return (
+            <div key={n.num} className="ladder-step" style={{borderColor:`${n.color}30`}}>
+              <div className="ls-num" style={{color:n.color}}>{n.num}</div>
+              <div className="ls-label" style={{color:n.color}}>{n.nom}</div>
+              <div style={{fontSize:".55rem",color:"var(--muted)",marginTop:4,lineHeight:1.35,opacity:.85}}>{n.sousTitre}</div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="intro-card">
         <h2>5 dimensions, 30 questions</h2>
-        <p>Ce questionnaire évalue votre transparence managériale au sens du chapitre 10 du livre — la transparence comme condition de la coresponsabilité, pas seulement comme obligation légale.</p>
+        <p>Ce questionnaire évalue votre transparence managériale au sens du chapitre 10 du livre · la transparence comme condition de la coresponsabilité, pas seulement comme obligation légale.</p>
         <div className="dims-grid">
           {DIMENSIONS.map(d=>(
             <div key={d.id} className="dim-pill" style={{borderColor:`${d.color}30`,background:`${d.color}08`}}>
@@ -714,13 +895,13 @@ function App() {
       </div>
 
       <div style={{textAlign:"center",paddingTop:8}}>
-        <button className="btn-start" onClick={()=>setPhase("quiz")}>
+        <button className="btn-start" onClick={()=>{setPhase("quiz");window.scrollTo({top:0,behavior:"smooth"});}}>
           Démarrer <span style={{fontSize:"1.2rem"}}>→</span>
         </button>
         <div style={{fontSize:".75rem",color:"var(--muted)",marginTop:12}}>environ 8 minutes · aucune donnée collectée</div>
       </div>
 
-      <div className="foot">Management Régénératif · Benjamin Chaminade</div>
+      <div className="foot" style={{color:"#C8C5BE",fontSize:".7rem"}}>Management Régénératif · Benjamin Chaminade</div>
     </div>
   );
 
@@ -729,7 +910,7 @@ function App() {
     <div className="app">
       <div style={{marginBottom:24}}>
         <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.4rem",color:"var(--text)",marginBottom:6}}>Transparence managériale</h1>
-        <p style={{fontSize:".8rem",color:"var(--muted)"}}>Répondez honnêtement — ce diagnostic n'a de valeur que si vous vous autorisez à voir ce qui est.</p>
+        <p style={{fontSize:".8rem",color:"var(--muted)"}}>Répondez honnêtement · ce diagnostic n'a de valeur que si vous vous autorisez à voir ce qui est.</p>
       </div>
 
       {/* progress */}
@@ -785,21 +966,53 @@ function App() {
         );
       })}
 
+      {/* Questions non répondues dans la dim courante */}
+      {(() => {
+        const unanswered = dimQs.filter(q => !rep[q.id]);
+        if (unanswered.length === 0) return null;
+        return (
+          <div style={{background:"rgba(224,112,64,.1)",border:"1px solid rgba(224,112,64,.3)",borderRadius:10,padding:"12px 16px",marginTop:8}}>
+            <div style={{fontSize:".7rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".06em",color:"#E07040",marginBottom:6}}>
+              {unanswered.length} question{unanswered.length>1?"s":"" } sans réponse sur cette page
+            </div>
+            {unanswered.map((q,i)=>{
+              const idx = dimQs.findIndex(dq=>dq.id===q.id);
+              return (
+                <div key={q.id} style={{fontSize:".78rem",color:"var(--muted)",padding:"3px 0",display:"flex",gap:8,alignItems:"flex-start"}}>
+                  <span style={{color:"#E07040",fontWeight:700,flexShrink:0}}>Q{idx+1}</span>
+                  <span style={{fontStyle:"italic"}}>{q.texte.slice(0,70)}…</span>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })()}
+
       <div className="nav-btns">
         <div>
-          {dimIdx>0 && <button className="btn btn-sec" onClick={()=>setDim(DIMENSIONS[dimIdx-1].id)}>← Précédent</button>}
+          {dimIdx>0 && <button className="btn btn-sec" onClick={()=>{setDim(DIMENSIONS[dimIdx-1].id);window.scrollTo({top:0,behavior:"smooth"});}}>← Précédent</button>}
         </div>
         <div style={{display:"flex",gap:10}}>
-          {dimIdx<DIMENSIONS.length-1
-            ? <button className="btn btn-next" onClick={()=>{setDim(DIMENSIONS[dimIdx+1].id);window.scrollTo({top:0,behavior:"smooth"});}}>Suivant →</button>
-            : <button className="btn btn-next" disabled={!allDone} onClick={()=>{setPhase("results");window.scrollTo({top:0,behavior:"smooth"});}}>
-                {allDone?"Voir mes résultats →":`Encore ${QUESTIONS.length-done} question(s)`}
+          {dimIdx<DIMENSIONS.length-1 ? (() => {
+            const dimUnanswered = dimQs.filter(q=>!rep[q.id]).length;
+            const canNext = dimUnanswered === 0;
+            return (
+              <button className="btn btn-next" disabled={!canNext}
+                title={!canNext ? `Répondez aux ${dimUnanswered} question(s) restante(s)` : ""}
+                onClick={()=>{setDim(DIMENSIONS[dimIdx+1].id);window.scrollTo({top:0,behavior:"smooth"});}}>
+                Suivant →
               </button>
-          }
+            );
+          })() : (
+            <button className="btn btn-next" disabled={!allDone}
+              onClick={()=>{setPhase("results");window.scrollTo({top:0,behavior:"smooth"});}}>
+              {allDone ? "Voir mes résultats →" : `Encore ${QUESTIONS.length-done} question(s)`}
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="foot">Management Régénératif · Benjamin Chaminade</div>
+      <div className="foot" style={{color:"#C8C5BE",fontSize:".7rem"}}>Management Régénératif · Benjamin Chaminade</div>
     </div>
   );
 
@@ -822,28 +1035,60 @@ function App() {
           Niveau {niv.num}
         </div>
         <div className="result-niv-name" style={{color:niv.color}}>{niv.nom}</div>
+        <div style={{fontSize:".78rem",color:"var(--muted)",marginBottom:6,fontStyle:"italic"}}>{niv.sousTitre}</div>
         <div className="result-score">{score} points / 150</div>
         <div className="result-scorebar">
           <div className="result-scorefill" style={{width:Math.round((score/150)*100)+"%",background:niv.color}} />
         </div>
+
+        {/* ── TITRE DU PROFIL SOUS LE SCORE ── */}
+        <div style={{marginTop:16,marginBottom:4,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+          <span style={{fontSize:"1.3rem",lineHeight:1}}>{profil.icon}</span>
+          <span style={{fontFamily:"'Playfair Display',serif",fontSize:"1.15rem",fontWeight:700,color:"var(--text)",letterSpacing:"-.01em"}}>
+            {profil.titre}
+          </span>
+        </div>
+        <div style={{fontSize:".78rem",color:"var(--muted)",marginBottom:18,fontStyle:"italic",maxWidth:480}}>
+          {profil.signal}
+        </div>
+
         <div className="result-desc">{niv.desc}</div>
         <div className="result-action" style={{borderColor:`${niv.color}40`,background:niv.bg}}>
           <div className="result-action-label" style={{color:niv.color}}>Action cette semaine</div>
           <p style={{color:"var(--text)",fontSize:".88rem"}}>{niv.action}</p>
         </div>
-        {/* TÉLÉCHARGEMENT WORD */}
-        <button className="btn btn-dl" onClick={()=>generateWord(rep)}
-          style={{marginTop:4}}>
+        {/* TÉLÉCHARGEMENT WORD avec confirmation */}
+        <button className="btn btn-dl" onClick={()=>setConfirmDl(true)} style={{marginTop:4}}>
           ↓ Télécharger le rapport Word
         </button>
         <p style={{fontSize:".7rem",color:"var(--muted)",marginTop:8}}>
-          Rapport personnalisé avec profil, scores par dimension et préconisations détaillées
+          Profil · Radar · Scores · Directive · Préconisations détaillées
         </p>
       </div>
 
+      {/* ── MODALE CONFIRMATION ── */}
+      {confirmDl && (
+        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.7)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100,padding:20}}>
+          <div style={{background:"var(--bg2)",border:"1px solid var(--border2)",borderRadius:16,padding:"32px 28px",maxWidth:420,width:"100%",textAlign:"center"}}>
+            <div style={{fontSize:"1.8rem",marginBottom:12}}>↓</div>
+            <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.2rem",color:"var(--text)",marginBottom:10}}>Télécharger le rapport Word ?</h3>
+            <p style={{fontSize:".85rem",color:"var(--muted)",lineHeight:1.7,marginBottom:22}}>
+              Le document inclut votre profil de manager, le radar des 5 dimensions, votre positionnement sur la directive (UE) 2023/970 et vos 3 préconisations détaillées avec étapes concrètes.
+            </p>
+            <div style={{display:"flex",gap:10,justifyContent:"center"}}>
+              <button className="btn btn-sec" onClick={()=>setConfirmDl(false)}>Annuler</button>
+              <button className="btn btn-dl" onClick={()=>{generateWord(rep);setConfirmDl(false);}}>Oui, télécharger</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── RADAR ── */}
+      <RadarChart rep={rep} niv={niv} />
+
       {/* ── TABS ── */}
       <div className="res-tabs">
-        {[["profil","◉ Mon profil"],["synthese","◈ Par dimension"],["directive","⚖ Directive 2026"],["recos","◎ Préconisations"],["detail","≡ Détail"]].map(([t,l])=>(
+        {[["profil",`◉ ${profil.titre.split(" ").slice(0,3).join(" ")}…`],["synthese","◈ Par dimension"],["directive","⚖ Directive 2026"],["recos","◎ Préconisations"],["detail","≡ Détail"]].map(([t,l])=>(
           <button key={t} className={`res-tab ${resTab===t?"active":""}`} onClick={()=>setResTab(t)}>{l}</button>
         ))}
       </div>
@@ -851,8 +1096,7 @@ function App() {
       {/* ── 1. PROFIL DE MANAGER ── */}
       {resTab==="profil" && (
         <div>
-          <div style={{background:"var(--bg2)",border:`1px solid ${niv.color}30`,borderRadius:16,padding:"32px 28px",marginBottom:16,position:"relative",overflow:"hidden"}}>
-            <div style={{position:"absolute",top:-10,right:-10,fontFamily:"'Playfair Display',serif",fontSize:120,fontWeight:900,opacity:.04,color:niv.color,lineHeight:1,pointerEvents:"none"}}>{profil.icon}</div>
+          <div style={{background:"var(--bg2)",border:`1px solid ${niv.color}30`,borderRadius:16,padding:"32px 28px",marginBottom:16}}>
             <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:niv.color,marginBottom:10}}>Votre profil de manager · Niveau {niv.num}</div>
             <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:"1.6rem",color:"var(--text)",marginBottom:16,letterSpacing:"-.01em"}}>{profil.icon} {profil.titre}</h2>
             <p style={{fontSize:".93rem",color:"var(--muted)",lineHeight:1.8,marginBottom:20}}>{profil.desc}</p>
@@ -875,7 +1119,8 @@ function App() {
                     {PROFILS_MANAGER[n.num]?.icon} {PROFILS_MANAGER[n.num]?.titre}
                     {n.num===niv.num && <span style={{fontSize:".65rem",background:n.color,color:"var(--bg)",padding:"2px 8px",borderRadius:10,marginLeft:8,fontWeight:700}}>VOUS</span>}
                   </div>
-                  <div style={{fontSize:".76rem",color:"var(--muted)",lineHeight:1.5}}>{n.desc}</div>
+                  <div style={{fontSize:".76rem",color:"var(--muted)",lineHeight:1.5,marginBottom:2}}>{n.sousTitre}</div>
+                  <div style={{fontSize:".72rem",color:"var(--muted)",opacity:.7,lineHeight:1.4}}>{n.desc}</div>
                 </div>
               </div>
             ))}
@@ -953,7 +1198,7 @@ function App() {
       {resTab==="recos" && (
         <div>
           <div className="conseil-box" style={{borderColor:`${niv.color}40`,background:niv.bg,marginBottom:20}}>
-            <div className="conseil-box-label" style={{color:niv.color}}>Conseil stratégique — Niveau {niv.num}</div>
+            <div className="conseil-box-label" style={{color:niv.color}}>Conseil stratégique · Niveau {niv.num}</div>
             <p style={{color:"var(--text)"}}>{niv.conseil}</p>
           </div>
           {recos.map((r,i)=>(
@@ -1003,7 +1248,7 @@ function App() {
                 <div key={q.id} className="det-row">
                   <div className="det-dot" style={{background:e?e.bg:"var(--faint)",color:"#fff"}}>{v}</div>
                   <div className="det-txt">{q.texte}</div>
-                  <div className="det-val" style={{color:e?e.bg:"var(--muted)"}}>{e?e.label:"—"}</div>
+                  <div className="det-val" style={{color:e?e.bg:"var(--muted)"}}>{e?e.label:"·"}</div>
                 </div>
               );
             })}
@@ -1012,13 +1257,17 @@ function App() {
       })}
 
       <div style={{textAlign:"center",marginTop:32,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-        <button className="btn btn-dl" onClick={()=>generateWord(rep)}>↓ Rapport Word</button>
-        <button className="btn btn-sec" onClick={()=>{setRep({});setDim("operationnelle");setPhase("intro");setResTab("profil");}}>Recommencer</button>
+        <button className="btn btn-dl" onClick={()=>setConfirmDl(true)}>↓ Rapport Word</button>
+        <a href="https://benjaminchaminade.com/contact/" target="_blank" rel="noopener noreferrer"
+          style={{display:"inline-flex",alignItems:"center",gap:8,padding:"11px 24px",background:"var(--n3)",color:"#0D1A0F",borderRadius:10,fontFamily:"'Outfit',sans-serif",fontWeight:700,fontSize:".88rem",textDecoration:"none",transition:"all .2s"}}>
+          Contacter Benjamin Chaminade →
+        </a>
+        <button className="btn btn-sec" onClick={()=>{setRep({});setDim("operationnelle");setPhase("intro");setResTab("profil");setConfirmDl(false);}}>Recommencer</button>
       </div>
 
-      <div className="foot">
+      <div className="foot" style={{color:"#C8C5BE",fontSize:".7rem"}}>
         Management Régénératif · Benjamin Chaminade<br/>
-        Chapitre 10 — Coconstruire le présent · <a href="https://benjaminchaminade.com/contact/" target="_blank" rel="noopener noreferrer" style={{color:"var(--muted)"}}>Contact</a>
+        Chapitre 10 · Coconstruire le présent · <a href="https://benjaminchaminade.com/contact/" target="_blank" rel="noopener noreferrer" style={{color:"#C8C5BE"}}>Contact</a>
       </div>
     </div>
   );
